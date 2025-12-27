@@ -113,8 +113,8 @@ const Home: React.FC = () => {
 
         <GlassCard className="space-y-6">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-sage-600 block">开启你的生命底色</label>
-            <p className="text-xs text-gray-400">输入你的出生时间，获取专属的“生活维生素”</p>
+           
+            <p className="text-xs text-gray-400">输入你的出生信息，获取专属的“唯她命”</p>
           </div>
 
           <div className="space-y-4">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { GlassCard } from '../components/GlassCard';
 import { Button } from '../components/Button';
@@ -108,6 +108,104 @@ const Result: React.FC = () => {
     // 3. 返回对应的洞察
     return insightLibrary[dominantElement][intensityLevel];
   };
+
+  // 养生建议生成函数
+  const generateHealthAdvice = (baziData: any, formData: any) => {
+    if (!baziData || !formData) return getDefaultHealthAdvice();
+    
+    const seed = (formData.year * 1000 + formData.month * 100 + formData.day * 10 + formData.hour) % 1000;
+    
+    // 晨间养生建议库
+    const morningAdvice = [
+      {
+        action: "饮一杯温润的茉莉花茶",
+        benefit: "疏肝理气，唤醒一天的通透感"
+      },
+      {
+        action: "品一壶清香的绿茶",
+        benefit: "清热降火，提升专注力"
+      },
+      {
+        action: "温饮一杯蜂蜜柠檬水",
+        benefit: "润燥生津，激活新陈代谢"
+      },
+      {
+        action: "慢品一杯温热的红茶",
+        benefit: "温阳暖胃，增强活力"
+      },
+      {
+        action: "享用一杯淡雅的白茶",
+        benefit: "清心宁神，平衡内在能量"
+      },
+      {
+        action: "细品一壶陈年普洱",
+        benefit: "养胃护脾，沉淀心境"
+      }
+    ];
+    
+    // 心流时刻建议库
+    const flowAdvice = [
+      {
+        action: "冥想与自然白噪音",
+        benefit: "适合在14:00 - 16:00进行一次深呼吸"
+      },
+      {
+        action: "轻柔的瑜伽拉伸",
+        benefit: "在10:00 - 12:00舒展筋骨，释放压力"
+      },
+      {
+        action: "静心书法练习",
+        benefit: "午后15:00 - 17:00让心境归于宁静"
+      },
+      {
+        action: "慢步行走冥想",
+        benefit: "傍晚18:00 - 19:00与自然同频共振"
+      },
+      {
+        action: "香薰精油疗愈",
+        benefit: "晚间20:00 - 21:00净化身心能量场"
+      },
+      {
+        action: "轻音乐静坐",
+        benefit: "清晨7:00 - 8:00调和五脏六腑"
+      }
+    ];
+    
+    // 根据种子选择建议
+    const morningIndex = seed % morningAdvice.length;
+    const flowIndex = (seed + 3) % flowAdvice.length;
+    
+    return {
+      morning: morningAdvice[morningIndex],
+      flow: flowAdvice[flowIndex]
+    };
+  };
+  
+  // 默认养生建议
+  const getDefaultHealthAdvice = () => ({
+    morning: {
+      action: "饮一杯温润的茉莉花茶",
+      benefit: "疏肝理气，唤醒一天的通透感"
+    },
+    flow: {
+      action: "冥想与自然白噪音",
+      benefit: "适合在14:00 - 16:00进行一次深呼吸"
+    }
+  });
+
+  // 生成个性化养生建议
+  const healthAdvice = useMemo(() => {
+    if (!bazi || !date || !time) return getDefaultHealthAdvice();
+    
+    const formData = {
+      year: parseInt(date.split('-')[0]),
+      month: parseInt(date.split('-')[1]),
+      day: parseInt(date.split('-')[2]),
+      hour: parseInt(time.split(':')[0])
+    };
+    
+    return generateHealthAdvice(bazi, formData);
+  }, [bazi, date, time]);
 
   // 搞钱建议数据
   const [moneyAdvice, setMoneyAdvice] = useState<any>(null);
@@ -298,7 +396,7 @@ const Result: React.FC = () => {
                 <Sparkles size={20} className="text-accent" />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-gray-400 uppercase mb-1">今日维生素</h4>
+                <h4 className="text-xs font-bold text-gray-400 uppercase mb-1">今日唯她命</h4>
                 <p className="text-lg font-serif-sc text-sage-600 font-bold">{aiData?.vitamin}</p>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed italic">
@@ -362,37 +460,42 @@ const Result: React.FC = () => {
         </GlassCard>
 
         {/* 今日搞钱建议 */}
-        <GlassCard className="relative overflow-hidden group bg-gradient-to-br from-green-50 to-emerald-50" delay={0.8}>
-          <div className="absolute -top-6 -right-6 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-            <TrendingUp size={120} className="text-green-500" />
+        <GlassCard className="relative overflow-hidden group bg-gradient-to-br from-[#FAF9F6] to-[#E8DFD2] border border-[#E6DCCD] shadow-[0_4px_20px_rgba(180,160,140,0.15)]" delay={0.8}>
+          <div className="absolute -top-6 -right-6 p-4 opacity-8 group-hover:opacity-12 transition-opacity">
+            <TrendingUp size={120} className="text-[#B5A695]" />
+          </div>
+          
+          {/* 微妙的装饰元素 */}
+          <div className="absolute top-4 right-4 w-16 h-16 rounded-full border border-[#C6B299] opacity-4">
+            <div className="absolute inset-2 rounded-full border border-[#B5A695] opacity-60"></div>
           </div>
           
           <div className="space-y-6 relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/60 text-[#6B5E51] rounded-full text-xs font-semibold">
               <DollarSign size={14} />
               <span>{moneyAdvice?.title}</span>
             </div>
             
             <div className="space-y-4">
-              <h3 className="text-xl font-serif-sc text-sage-600 font-bold">财运密码</h3>
-              <p className="text-gray-600 text-sm leading-relaxed tracking-wide">
+              <h3 className="text-xl font-serif-sc text-[#6B5E51] font-bold">财运密码</h3>
+              <p className="text-[#8C8174] text-sm leading-relaxed tracking-wide">
                 {moneyAdvice?.advice}
               </p>
               
               <div className="grid grid-cols-2 gap-4 pt-2">
-                <div className="bg-white/60 rounded-lg p-3">
-                  <p className="text-xs text-gray-500 mb-1">吉利方位</p>
-                  <p className="text-sm font-medium text-sage-600">{moneyAdvice?.luckyDirection}</p>
+                <div className="bg-white/60 rounded-lg p-3 border border-white/30">
+                  <p className="text-xs text-[#8C8174] mb-1 font-medium">吉利方位</p>
+                  <p className="text-sm font-medium text-[#6B5E51]">{moneyAdvice?.luckyDirection}</p>
                 </div>
-                <div className="bg-white/60 rounded-lg p-3">
-                  <p className="text-xs text-gray-500 mb-1">最佳时机</p>
-                  <p className="text-sm font-medium text-sage-600">{moneyAdvice?.luckyTime}</p>
+                <div className="bg-white/60 rounded-lg p-3 border border-white/30">
+                  <p className="text-xs text-[#8C8174] mb-1 font-medium">最佳时机</p>
+                  <p className="text-sm font-medium text-[#6B5E51]">{moneyAdvice?.luckyTime}</p>
                 </div>
               </div>
               
-              <div className="bg-green-100/50 rounded-lg p-3">
-                <p className="text-xs text-green-600 font-medium mb-1">💡 理财建议</p>
-                <p className="text-sm text-green-700">{moneyAdvice?.suggestion}</p>
+              <div className="bg-white/50 rounded-lg p-3 border border-[#E6DCCD]/50">
+                <p className="text-xs text-[#6B5E51] font-medium mb-1">💰 理财建议</p>
+                <p className="text-sm text-[#8C8174]">{moneyAdvice?.suggestion}</p>
               </div>
             </div>
           </div>
@@ -412,8 +515,8 @@ const Result: React.FC = () => {
                 <Coffee className="text-amber-500" size={24} />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-medium text-sage-700">饮一杯温润的茉莉花茶</p>
-                <p className="text-xs text-gray-400">疏肝理气，唤醒一天的通透感</p>
+                <p className="text-sm font-medium text-sage-700">{healthAdvice.morning.action}</p>
+                <p className="text-xs text-gray-400">{healthAdvice.morning.benefit}</p>
               </div>
             </GlassCard>
 
@@ -423,24 +526,26 @@ const Result: React.FC = () => {
                 <Music className="text-primary" size={24} />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-medium text-sage-700">冥想与自然白噪音</p>
-                <p className="text-xs text-gray-400">适合在14:00 - 16:00进行一次深呼吸</p>
+                <p className="text-sm font-medium text-sage-700">{healthAdvice.flow.action}</p>
+                <p className="text-xs text-gray-400">{healthAdvice.flow.benefit}</p>
               </div>
             </GlassCard>
           </div>
         </section>
 
-        {/* 每日金句 */}
-        <GlassCard className="bg-primary text-white border-none py-8 text-center" delay={1.1}>
-          <p className="font-serif-sc text-lg mb-2">" 顺应天时，自有光芒。 "</p>
-          <p className="text-white/70 text-xs tracking-widest uppercase">The Essence of Vita-Me</p>
-        </GlassCard>
+
 
         <div className="flex flex-col gap-3 pt-4">
           <Button variant="ghost" className="w-full border border-sage-100" onClick={() => navigate('/')}>
             返回首页
           </Button>
         </div>
+
+                {/* 每日金句 */}
+       
+          <p className="font-serif-sc text-sm mb-2 text-primary text-center">" 顺应天时，自有光芒 " <br />The Essence of Vita-Me</p>
+          
+        
       </main>
     </div>
   );
