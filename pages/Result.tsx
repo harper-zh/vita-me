@@ -13,6 +13,9 @@ const Result: React.FC = () => {
   const navigate = useNavigate();
   const date = searchParams.get('date') || '';
   const time = searchParams.get('time') || '';
+  const vitaminId = searchParams.get('vitaminId') || '';
+  const province = searchParams.get('province') || '';
+  const city = searchParams.get('city') || '';
   
   const [bazi, setBazi] = useState<any>(null);
   const [aiData, setAiData] = useState<any>(null);
@@ -20,6 +23,91 @@ const Result: React.FC = () => {
 
   // 五行数据用于流体能量场
   const [wuxingData, setWuxingData] = useState<any>({});
+
+  // 五行洞察库
+  const insightLibrary = {
+    metal: {
+      balanced: { // Count 1-2
+        title: "核心驱动：锐意革新 (Precision)",
+        desc: "金气适中。您拥有极佳的决断力，善于剔除冗余，是团队中执行力最强的破局者。"
+      },
+      excessive: { // Count 3+
+        title: "核心预警：刚极易折 (Rigidity)",
+        desc: "金气过旺。您的原则性极强，但需警惕过分挑剔与不妥协。学会柔能克刚是进阶关键。"
+      }
+    },
+    wood: {
+      balanced: { // Count 1-2
+        title: "核心驱动：栋梁之材 (Growth)",
+        desc: "木气疏朗。您具备强大的逻辑与仁爱之心，如大树般向下扎根、向上生长，发展潜力无限。"
+      },
+      excessive: { // Count 3+
+        title: "核心预警：盘根错节 (Overthinking)",
+        desc: "木气繁杂。您思维活跃但易陷于细节纠结。需学会修剪枝叶，专注核心目标，避免多谋少断。"
+      }
+    },
+    water: {
+      balanced: { // Count 1-2
+        title: "核心驱动：运筹帷幄 (Wisdom)",
+        desc: "水气通透。您拥有流动的智慧与顶级直觉，善于在变化中寻找机会，适应力极强。"
+      },
+      excessive: { // Count 3+
+        title: "核心预警：随波逐流 (Drifting)",
+        desc: "水气漫灌。您思虑深远但易受情绪淹没。需增强定力与边界感，防止聪明反被聪明误。"
+      }
+    },
+    fire: {
+      balanced: { // Count 1-2
+        title: "核心驱动：燃情领袖 (Charisma)",
+        desc: "火气明亮。您是人群中的光源，具有极强的感召力与行动力，能瞬间点燃团队激情。"
+      },
+      excessive: { // Count 3+
+        title: "核心预警：烈火烹油 (Impulsiveness)",
+        desc: "火势燎原。您的热情极高但易急躁。需警惕三分钟热度，学会控制节奏，避免透支能量。"
+      }
+    },
+    earth: {
+      balanced: { // Count 1-2
+        title: "核心驱动：中流砥柱 (Stability)",
+        desc: "土气厚重。您信用卓著，稳健可靠。拥有极强的承载力，是值得托付重任的基石。"
+      },
+      excessive: { // Count 3+
+        title: "核心预警：固步自封 (Stubbornness)",
+        desc: "土气淤滞。您极其稳重但稍显固执。需警惕墨守成规，适当接纳新知变通，方能打破僵局。"
+      }
+    }
+  };
+
+  // 获取主导元素洞察
+  const getDominantInsight = (wuxingData: any) => {
+    // 1. 找到数量最多的元素
+    const elementCounts = {
+      wood: wuxingData.wood || 0,
+      fire: wuxingData.fire || 0,
+      earth: wuxingData.earth || 0,
+      metal: wuxingData.metal || 0,
+      water: wuxingData.water || 0
+    };
+
+    // 找到最大值的元素
+    const maxCount = Math.max(...Object.values(elementCounts));
+    const dominantElement = Object.keys(elementCounts).find(
+      key => elementCounts[key as keyof typeof elementCounts] === maxCount
+    ) as keyof typeof insightLibrary;
+
+    if (!dominantElement || maxCount === 0) {
+      return {
+        title: "能量平衡 (Balanced)",
+        desc: "您的五行能量分布均衡，展现出和谐统一的生命状态。"
+      };
+    }
+
+    // 2. 判断强度级别
+    const intensityLevel = maxCount >= 3 ? 'excessive' : 'balanced';
+
+    // 3. 返回对应的洞察
+    return insightLibrary[dominantElement][intensityLevel];
+  };
 
   // 搞钱建议数据
   const [moneyAdvice, setMoneyAdvice] = useState<any>(null);
@@ -37,12 +125,20 @@ const Result: React.FC = () => {
         const wuxingCount = processWuxingData(baziResult.wuxing);
         setWuxingData(wuxingCount);
         
-        // 3. 获取 AI 解读
-        const aiResponse = await getAIInterpretation(baziResult);
+        // 3. 准备表单数据
+        const formData = {
+          year: parseInt(date.split('-')[0]),
+          month: parseInt(date.split('-')[1]),
+          day: parseInt(date.split('-')[2]),
+          hour: parseInt(time.split(':')[0])
+        };
+        
+        // 4. 获取 AI 解读 (传递表单数据)
+        const aiResponse = await getAIInterpretation(baziResult, formData);
         setAiData(aiResponse);
         
-        // 4. 获取搞钱建议 (暂时用模拟数据)
-        const moneyResponse = await getMoneyAdvice(baziResult);
+        // 5. 获取搞钱建议 (传递表单数据)
+        const moneyResponse = await getMoneyAdvice(baziResult, formData);
         setMoneyAdvice(moneyResponse);
       } catch (err) {
         console.error("Calculation Error:", err);
@@ -98,7 +194,7 @@ const Result: React.FC = () => {
           <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" size={20} />
         </motion.div>
         <div className="text-center space-y-2">
-          <p className="text-sage-600 font-serif-sc text-xl tracking-widest">正在采撷你的星尘</p>
+          <p className="text-sage-600 font-serif-sc text-xl tracking-widest">正在采撷妳的星尘</p>
           <p className="text-gray-400 text-xs animate-pulse">解析生命密码中...</p>
         </div>
       </div>
@@ -111,18 +207,43 @@ const Result: React.FC = () => {
         <button onClick={() => navigate('/')} className="p-2 hover:bg-white/50 rounded-full transition-all">
           <ChevronLeft className="text-sage-600" />
         </button>
-        <h2 className="text-xl font-serif-sc text-sage-600 font-bold tracking-widest">生命图谱</h2>
+        <h2 className="text-xl font-serif-sc text-sage-600 font-bold tracking-widest">Vita-Me</h2>
         <button className="p-2 hover:bg-white/50 rounded-full transition-all">
           <Share2 className="text-sage-600" size={20} />
         </button>
       </header>
 
       <main className="max-w-2xl mx-auto space-y-8">
+        {/* Vitamin ID 显示 */}
+
+
+
+                {vitaminId && (
+          <GlassCard className="bg-gradient-to-r from-primary/10 to-accent/10 border-none" delay={0.1}>
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-white/60 rounded-2xl">
+                <Fingerprint size={20} className="text-primary" />
+              </div>
+              <div className="flex-1">
+                {/* <p className="text-xs font-bold text-gray-400 uppercase mb-1">Vitamin ID</p> */}
+                <p className="text-lg font-mono font-bold text-sage-600 tracking-wider">{vitaminId}</p>
+                {(province || city) && (
+                  <p className="text-xs text-gray-500 mt-1">
+                    出生地：{province} {city}
+                  </p>
+                )}
+              </div>
+            </div>
+          </GlassCard>
+        )}
+
+
+
         {/* 八字原局 */}
         <section className="space-y-4">
           <div className="flex items-center gap-2 px-1">
             <Fingerprint size={16} className="text-primary" />
-            <span className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Personal Bazi Chart</span>
+            <span className="text-[10px] uppercase tracking-widest font-bold text-gray-400">八字解读</span>
           </div>
           <div className="grid grid-cols-4 gap-4">
             {bazi && [
@@ -156,8 +277,8 @@ const Result: React.FC = () => {
             </div>
             
             <div className="space-y-4">
-              <h3 className="text-2xl font-serif-sc text-sage-600 font-bold">你的性格底色</h3>
-              <p className="text-gray-600 text-sm leading-relaxed tracking-wide first-letter:text-3xl first-letter:font-serif-sc first-letter:mr-1 first-letter:float-left first-letter:text-primary">
+              <h3 className="text-2xl font-serif-sc text-sage-600 font-bold">妳的性格底色</h3>
+              <p className="text-gray-600 text-sm leading-relaxed tracking-wide ">
                 {aiData?.personality}
               </p>
               <div className="pt-2">
@@ -192,11 +313,11 @@ const Result: React.FC = () => {
                 <div className="w-5 h-5 rounded-full border border-primary/30" style={{ backgroundColor: '#6B9080' }} />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-gray-400 uppercase mb-1">能量色彩</h4>
+                <h4 className="text-xs font-bold text-gray-400 uppercase mb-1">旺己色</h4>
                 <p className="text-lg font-serif-sc text-sage-600 font-bold">{aiData?.luckyColor}</p>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed">
-                这是你当下的气场共鸣色，尝试在穿搭或环境中点缀它。
+                这是妳当下的气场共鸣色，尝试在穿搭或环境中点缀它。
               </p>
             </div>
           </GlassCard>
@@ -223,10 +344,19 @@ const Result: React.FC = () => {
             
             {/* 能量解读 */}
             <div className="bg-white/40 rounded-xl p-4 backdrop-blur-sm">
-              <p className="text-xs text-sage-600 leading-relaxed">
-                你的生命能量呈现出独特的流动模式，每个元素都在以自己的频率共振，
-                创造出专属于你的能量指纹。
-              </p>
+              {(() => {
+                const insight = getDominantInsight(wuxingData);
+                return (
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-bold text-sage-700 tracking-wide">
+                      {insight.title}
+                    </h4>
+                    <p className="text-xs text-sage-600 leading-relaxed">
+                      {insight.desc}
+                    </p>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </GlassCard>

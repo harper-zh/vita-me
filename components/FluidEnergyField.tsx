@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './FluidEnergyField.css';
 
 interface EnergyData {
@@ -13,18 +13,41 @@ interface FluidEnergyFieldProps {
   data: EnergyData;
 }
 
+// 五行元素定义
+const elementDefinitions = {
+  metal: { 
+    label: '金 (锐气)', 
+    description: '代表决断力、执行力',
+    color: '#f0e9e9ff'
+  },
+  wood: { 
+    label: '木 (生机)', 
+    description: '代表创造力、同情心',
+    color: '#addca2ff'
+  },
+  water: { 
+    label: '水 (智慧)', 
+    description: '代表直觉、应变能力',
+    color: '#5aa2efff'
+  },
+  fire: { 
+    label: '火 (感染)', 
+    description: '代表热情、社交表现力',
+    color: '#f2aeb4ff'
+  },
+  earth: { 
+    label: '土 (承载)', 
+    description: '代表稳定性、财富承载力',
+    color: '#e5cfb5ff'
+  }
+};
+
 export const FluidEnergyField: React.FC<FluidEnergyFieldProps> = ({ data }) => {
-  // 莫兰迪五行色值 - 调亮版本
-  const colors = {
-    wood: '#addca2ff',  // 更亮的鼠尾草绿
-    fire: '#f2aeb4ff',  // 更亮的桃粉
-    earth: '#e5cfb5ff', // 更亮的粘土黄
-    metal: '#C8CCD0', // 更亮的迷雾灰
-    water: '#5aa2efff'  // 更亮的深海蓝
-  };
+  const [hoveredElement, setHoveredElement] = useState<string | null>(null);
+  const [isContainerHovered, setIsContainerHovered] = useState(false);
 
   // SVG画布尺寸
-  const svgSize = 300;
+  const svgSize = 500;
   const center = svgSize / 2;
 
   // 计算总数用于比例
@@ -42,11 +65,11 @@ export const FluidEnergyField: React.FC<FluidEnergyFieldProps> = ({ data }) => {
 
   // 正五边形分布计算圆心位置
   const elements = [
-    { key: 'wood', value: displayData.wood, color: colors.wood },
-    { key: 'fire', value: displayData.fire, color: colors.fire },
-    { key: 'earth', value: displayData.earth, color: colors.earth },
-    { key: 'metal', value: displayData.metal, color: colors.metal },
-    { key: 'water', value: displayData.water, color: colors.water }
+    { key: 'wood', value: displayData.wood, ...elementDefinitions.wood },
+    { key: 'fire', value: displayData.fire, ...elementDefinitions.fire },
+    { key: 'earth', value: displayData.earth, ...elementDefinitions.earth },
+    { key: 'metal', value: displayData.metal, ...elementDefinitions.metal },
+    { key: 'water', value: displayData.water, ...elementDefinitions.water }
   ];
 
   const circles = elements.map((element, index) => {
@@ -57,24 +80,37 @@ export const FluidEnergyField: React.FC<FluidEnergyFieldProps> = ({ data }) => {
     const x = center + Math.cos(angle) * distance;
     const y = center + Math.sin(angle) * distance;
     
-    // 半径映射：15% - 40% 的画布宽度
+    // 半径映射：15% - 35% 的画布宽度 (缩小最大半径)
     const displayTotal = displayData.wood + displayData.fire + displayData.earth + displayData.metal + displayData.water;
-    const ratio = displayTotal > 0 ? element.value / displayTotal : 0.2;
+    const ratio = displayTotal > 0 ? element.value / displayTotal : 0.1;
     const minRadius = svgSize * 0.15; // 15%
-    const maxRadius = svgSize * 0.4;  // 40%
+    const maxRadius = svgSize * 0.45; 
     const radius = minRadius + (maxRadius - minRadius) * ratio;
+
+    // 计算交互状态
+    const isHovered = hoveredElement === element.key;
+    const isOtherHovered = hoveredElement && hoveredElement !== element.key;
 
     return {
       ...element,
       x,
       y,
       radius,
-      animationDelay: index * 0.3
+      animationDelay: index * 0.3,
+      isHovered,
+      isOtherHovered
     };
   });
 
   return (
-    <div className="fluid-energy-container">
+    <div 
+      className={`fluid-energy-container ${isContainerHovered ? 'container-hovered' : ''}`}
+      onMouseEnter={() => setIsContainerHovered(true)}
+      onMouseLeave={() => {
+        setIsContainerHovered(false);
+        setHoveredElement(null);
+      }}
+    >
       <svg
         width={svgSize}
         height={svgSize}
@@ -99,6 +135,14 @@ export const FluidEnergyField: React.FC<FluidEnergyFieldProps> = ({ data }) => {
               <feMergeNode in="SourceGraphic"/> 
             </feMerge>
           </filter>
+
+          <filter id="intenseGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="20" result="coloredBlur"/>
+            <feMerge> 
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/> 
+            </feMerge>
+          </filter>
         </defs>
 
         {/* 绘制五个重叠圆形 */}
@@ -109,14 +153,16 @@ export const FluidEnergyField: React.FC<FluidEnergyFieldProps> = ({ data }) => {
             cy={circle.y}
             r={circle.radius}
             fill={circle.color}
-            opacity="0.75"
-            filter="url(#fluidBlur)"
-            className={`energy-circle energy-circle-${index}`}
+            opacity={circle.isHovered ? "0.95" : circle.isOtherHovered ? "0.3" : "0.75"}
+            filter={circle.isHovered ? "url(#intenseGlow)" : "url(#fluidBlur)"}
+            className={`energy-circle energy-circle-${index} ${circle.isHovered ? 'circle-spotlight' : ''} ${circle.isOtherHovered ? 'circle-dimmed' : ''}`}
             style={{
               mixBlendMode: 'screen',
               animationDelay: `${circle.animationDelay}s`,
-              transition: 'all 1.5s ease-in-out'
+              transition: 'all 0.4s ease-in-out',
+              cursor: 'pointer'
             }}
+            onMouseEnter={() => setHoveredElement(circle.key)}
           />
         ))}
 
@@ -128,13 +174,15 @@ export const FluidEnergyField: React.FC<FluidEnergyFieldProps> = ({ data }) => {
             cy={circle.y}
             r={circle.radius * 0.3}
             fill={circle.color}
-            opacity="0.8"
-            filter="url(#softGlow)"
-            className={`energy-core energy-core-${index}`}
+            opacity={circle.isHovered ? "1" : circle.isOtherHovered ? "0.4" : "0.8"}
+            filter={circle.isHovered ? "url(#intenseGlow)" : "url(#softGlow)"}
+            className={`energy-core energy-core-${index} ${circle.isHovered ? 'core-spotlight' : ''}`}
             style={{
               animationDelay: `${circle.animationDelay + 0.5}s`,
-              transition: 'all 1.5s ease-in-out'
+              transition: 'all 0.4s ease-in-out',
+              cursor: 'pointer'
             }}
+            onMouseEnter={() => setHoveredElement(circle.key)}
           />
         ))}
 
@@ -144,8 +192,9 @@ export const FluidEnergyField: React.FC<FluidEnergyFieldProps> = ({ data }) => {
           cy={center}
           r="3"
           fill="#A8C4A2"
-          opacity="0.6"
+          opacity={hoveredElement ? "0.3" : "0.6"}
           className="center-dot"
+          style={{ transition: 'opacity 0.4s ease-in-out' }}
         />
       </svg>
 
@@ -154,7 +203,7 @@ export const FluidEnergyField: React.FC<FluidEnergyFieldProps> = ({ data }) => {
         {circles.map((circle) => (
           <div
             key={`label-${circle.key}`}
-            className="energy-label"
+            className={`energy-label ${circle.isHovered ? 'label-spotlight' : ''} ${circle.isOtherHovered ? 'label-dimmed' : ''}`}
             style={{
               left: `${(circle.x / svgSize) * 100}%`,
               top: `${(circle.y / svgSize) * 100}%`
@@ -179,9 +228,23 @@ export const FluidEnergyField: React.FC<FluidEnergyFieldProps> = ({ data }) => {
       </div>
 
       {/* 中心文字 */}
-      <div className="center-text">
+      <div className={`center-text ${hoveredElement ? 'text-hidden' : ''}`}>
         <div className="center-title">能量共振</div>
-        <div className="center-subtitle">Energy Resonance</div>
+        
+      </div>
+
+      {/* 元素详情显示 */}
+      <div className={`element-details ${hoveredElement ? 'details-visible' : ''}`}>
+        {hoveredElement && (
+          <div className="detail-content" style={{ color: elementDefinitions[hoveredElement as keyof typeof elementDefinitions].color }}>
+            <div className="detail-label">
+              {elementDefinitions[hoveredElement as keyof typeof elementDefinitions].label}
+            </div>
+            <div className="detail-description">
+              {elementDefinitions[hoveredElement as keyof typeof elementDefinitions].description}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
