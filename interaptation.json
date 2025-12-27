@@ -1,0 +1,171 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "project": "Vita-Me",
+    "tone": "Empowering, Professional, Morandi-Vibe"
+  },
+  "fiveElements": {
+    "Metal": {
+      "name": "金",
+      "archetype": "高精尖操盘手",
+      "keywords": ["逻辑闭环", "结果导向", "极简主义"],
+      "energyColor": "#A8B5B2",
+      "description": "你的能量场如同精密的手术刀。在职场中，你拥有剥离情绪、直击本质的可怕能力。你不是冷漠，你是为了效率在节省算力。",
+      "careerAdvice": "适合高强度的金融、法律或技术架构领域。你的'锋利'是变现的最强武器，不要试图变圆滑，要学会给你的锋利配上昂贵的刀鞘。"
+    },
+    "Wood": {
+      "name": "木",
+      "archetype": "生态构建者",
+      "keywords": ["长期主义", "向上生长", "共情链接"],
+      "energyColor": "#8FBC8F",
+      "description": "你拥有极强的韧性和治愈力。你是团队中的精神支柱，擅长整合资源，像藤蔓一样链接各方利益，最终长成参天大树。",
+      "careerAdvice": "适合教育、人力资源、社群运营或医疗健康。你的核心竞争力是'人脉复利'，保持善良，但要给善良带上牙齿。"
+    },
+    "Water": {
+      "name": "水",
+      "archetype": "战略架构师",
+      "keywords": ["流动适应", "深度思考", "降维打击"],
+      "energyColor": "#8FB8DE",
+      "description": "上善若水，你拥有最强的适应力和渗透力。你的思维没有边界，擅长在混乱的市场中找到流动的方向，润物细无声地达成目标。",
+      "careerAdvice": "适合咨询、贸易、数据分析或自由职业。不要被固定的工位束缚，'流动'才能带来财富，去风口最活跃的地方。"
+    },
+    "Fire": {
+      "name": "火",
+      "archetype": "超级连接者",
+      "keywords": ["影响力", "舞台中心", "情绪价值"],
+      "energyColor": "#E6B8A2",
+      "description": "你是天生的发光体。你的热情和表达欲能瞬间点燃团队，拥有极强的感召力。在注意力经济时代，你的'可见度'就是生产力。",
+      "careerAdvice": "适合媒体、演艺、公关或销售。不要吝啬展示自己，你的能量必须向外释放。建立个人IP（Personal Brand）是你回报率最高的投资。"
+    },
+    "Earth": {
+      "name": "土",
+      "archetype": "信任锚点",
+      "keywords": ["承载力", "信用资产", "稳健复利"],
+      "energyColor": "#D3C09A",
+      "description": "你是最值得信赖的基石。你稳重、包容，能转化所有的压力为养分。在浮躁的时代，你的'靠谱'是稀缺的硬通货。",
+      "careerAdvice": "适合房地产、行政管理、仓储或平台建设。你是做'平台'的人，适合守成和积累。相信复利的力量，做时间的朋友。"
+    }
+  },
+  "tenGods": {
+    "BiJian": {
+      "name": "比肩",
+      "code": "Friend",
+      "archetype": "独立合伙人",
+      "keywords": ["自我驱动", "平等意识", "长期战友"],
+      "tagline": "我不依附于任何人，我就是我自己的靠山。",
+      "reinterpretation": {
+        "traditional_bias": "常被误读为'克父'或'破财'。",
+        "modern_value": "这是'独立人格'的基石。代表你拥有极强的自尊心和执行力，不屑于搞办公室政治，信奉实力至上。"
+      },
+      "actionItem": "适合合伙创业或独立接案。你的自律不需要老板盯着，但要注意不要陷入'单打独斗'的死胡同，学会外包非核心业务。"
+    },
+    "JieCai": {
+      "name": "劫财",
+      "code": "RobWealth",
+      "archetype": "资源整合家",
+      "keywords": ["社交杠杆", "野蛮生长", "借力打力"],
+      "tagline": "金钱只是工具，人脉才是真正的资产。",
+      "reinterpretation": {
+        "traditional_bias": "传统视角下的'败家'或'被骗'。",
+        "modern_value": "这是'社交变现'的天赋。你拥有极强的煽动性和组织能力，敢于利用他人的资源来达成自己的目标，是天生的销售冠军。"
+      },
+      "actionItem": "去离钱最近的地方。利用你的社交直觉进行高风险高回报的博弈，但要建立严格的风控底线。"
+    },
+    "ShiShen": {
+      "name": "食神",
+      "code": "EatingGod",
+      "archetype": "生活产品经理",
+      "keywords": ["松弛感", "审美红利", "心流体验"],
+      "tagline": "在这个卷生卷死的时代，'快乐'是你最高级的生产力。",
+      "reinterpretation": {
+        "traditional_bias": "常被认为是'贪吃'或'懒惰'。",
+        "modern_value": "这是'情绪价值'的源泉。你拥有极佳的艺术感知力和语言天赋，能把生活过成诗，这种松弛感在焦虑的职场极其稀缺。"
+      },
+      "actionItem": "深耕内容创作、美食、艺术或疗愈行业。你的才华需要在'不费力'的状态下才能流淌出来，拒绝高压环境。"
+    },
+    "ShangGuan": {
+      "name": "伤官",
+      "code": "HurtingOfficer",
+      "archetype": "规则颠覆者",
+      "keywords": ["降维打击", "个人IP", "创意变现"],
+      "tagline": "平庸是你的墓志铭，才华是你的通行证。",
+      "reinterpretation": {
+        "traditional_bias": "传统视角的'克夫'或'傲慢'。",
+        "modern_value": "这是'才华变现'的巅峰信号。代表你拥有超越体制的创造力和极佳的表达欲，是天生的KOL和创意总监。"
+      },
+      "actionItem": "远离死板的科层制公司。利用你的审美和表达能力建立个人品牌。你的'叛逆'其实是领先市场的洞察力。"
+    },
+    "ZhengCai": {
+      "name": "正财",
+      "code": "DirectWealth",
+      "archetype": "首席运营官",
+      "keywords": ["精细化管理", "稳健收益", "长期主义"],
+      "tagline": "每一分投入都要有产出，你是行走的ROI计算器。",
+      "reinterpretation": {
+        "traditional_bias": "常被认为是'吝啬'或'死板'。",
+        "modern_value": "这是'资产增值'的保障。你对数字敏感，做事有条理，是企业中最需要的管家婆和COO人选。"
+      },
+      "actionItem": "适合财务、运营或公务员。你的财富来自于日积月累的耕耘，不要眼红别人的暴富，你的护城河是'稳'。"
+    },
+    "PianCai": {
+      "name": "偏财",
+      "code": "IndirectWealth",
+      "archetype": "风投女王",
+      "keywords": ["商业嗅觉", "宏观视野", "机会主义"],
+      "tagline": "风口在哪里，我就在哪里。",
+      "reinterpretation": {
+        "traditional_bias": "常被误读为'浮躁'或'烂桃花'。",
+        "modern_value": "这是'资本运作'的天赋。你拥有宏观格局，不拘小节，善于发现市场的信息差，天生适合做投资和操盘。"
+      },
+      "actionItem": "尝试副业、投资或贸易。不要死守一份死工资，你的财富在'流动'和'交换'中产生。"
+    },
+    "ZhengGuan": {
+      "name": "正官",
+      "code": "DirectOfficer",
+      "archetype": "名流精英",
+      "keywords": ["自律", "权威认证", "社会声望"],
+      "tagline": "优雅是你的铠甲，自律是你的权杖。",
+      "reinterpretation": {
+        "traditional_bias": "传统语境下的'夫星'（丈夫）。",
+        "modern_value": "这是'社会地位'的象征。代表你拥有极强的自我管理能力和领导气质，容易获得主流社会的认可和提拔。"
+      },
+      "actionItem": "进入大厂、政府或跨国企业。你需要一个强大的平台来背书，沿着既定的晋升阶梯，你能走到金字塔顶端。"
+    },
+    "QiSha": {
+      "name": "七杀",
+      "code": "SevenKillings",
+      "archetype": "乱世破局者",
+      "keywords": ["危机管理", "野心家", "反脆弱"],
+      "tagline": "温室养不出带刺的玫瑰，你是为风暴而生的船长。",
+      "reinterpretation": {
+        "traditional_bias": "通常被误读为'动荡'或'灾祸'。",
+        "modern_value": "这是顶级的创业者与CEO配置。代表着极强的抗压能力和在混乱中建立新秩序的魄力。"
+      },
+      "actionItem": "不要做执行层，去争取拥有决策权的岗位。你的能量需要通过'解决不可能的问题'来释放，常规工作只会让你内耗。"
+    },
+    "ZhengYin": {
+      "name": "正印",
+      "code": "DirectResource",
+      "archetype": "智慧导师",
+      "keywords": ["知识付费", "贵人运", "品牌背书"],
+      "tagline": "你不需要追逐马儿，你种下草地，马儿自然会来。",
+      "reinterpretation": {
+        "traditional_bias": "常被认为是'依赖'或'懒散'。",
+        "modern_value": "这是'吸纳资源'的能力。你天生自带亲和力和信赖感，容易获得长辈或上级的提携，适合做知识IP。"
+      },
+      "actionItem": "深造学历、考证或从事教育咨询。你的名声就是金字招牌，'被动收入'最适合你。"
+    },
+    "PianYin": {
+      "name": "偏印",
+      "code": "IndirectResource",
+      "archetype": "洞察专家",
+      "keywords": ["独辟蹊径", "直觉力", "小众领域"],
+      "tagline": "真理往往掌握在少数人手中，而你就是那个少数人。",
+      "reinterpretation": {
+        "traditional_bias": "常被误读为'孤僻'或'刻薄'（枭神）。",
+        "modern_value": "这是'深度钻研'的天赋。你拥有看透本质的X光眼，在冷门、前沿或玄学领域能成为顶级专家。"
+      },
+      "actionItem": "从事研发、侦查、心理学或策略顾问。不要试图讨好大众，深耕你的垂直领域，成为不可替代的'怪才'。"
+    }
+  }
+}

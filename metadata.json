@@ -1,0 +1,7 @@
+{
+  "name": "Vita-Me (唯她命)",
+  "description": "A modern wellness MVP blending traditional Bazi metaphysics with contemporary lifestyle guidance, powered by Gemini AI.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
