@@ -4,19 +4,48 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
+    
+    // 获取仓库名称用于GitHub Pages base路径
+    const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || '';
+    const isProduction = mode === 'production';
+    const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
+    
     return {
+      // GitHub Pages部署时设置base路径
+      base: isProduction && isGitHubPages ? `/${repoName}/` : '/',
+      
       server: {
         port: 3000,
         host: '0.0.0.0',
       },
+      
       plugins: [react()],
+      
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
       },
+      
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '.'),
+        }
+      },
+      
+      // 构建配置
+      build: {
+        outDir: 'dist',
+        assetsDir: 'assets',
+        sourcemap: false,
+        // 优化构建
+        rollupOptions: {
+          output: {
+            manualChunks: {
+              vendor: ['react', 'react-dom'],
+              router: ['react-router-dom'],
+              ui: ['framer-motion', 'lucide-react']
+            }
+          }
         }
       }
     };
