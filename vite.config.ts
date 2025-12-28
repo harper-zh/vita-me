@@ -5,13 +5,13 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     
-    // 获取仓库名称用于GitHub Pages base路径
+    // 获取仓库名称用于GitHub Pages
     const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || '';
     const isProduction = mode === 'production';
     const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
     
     return {
-      // GitHub Pages部署时设置base路径
+      // 设置GitHub Pages的base路径
       base: isProduction && isGitHubPages ? `/${repoName}/` : '/',
       
       server: {
@@ -37,7 +37,6 @@ export default defineConfig(({ mode }) => {
         outDir: 'dist',
         assetsDir: 'assets',
         sourcemap: false,
-        // 优化构建
         rollupOptions: {
           output: {
             manualChunks: {
