@@ -23,7 +23,8 @@ export default defineConfig(({ mode }) => {
       
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+        'process.env.ZHIPU_API_KEY': JSON.stringify(env.ZHIPU_API_KEY)
       },
       
       resolve: {

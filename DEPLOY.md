@@ -1,6 +1,47 @@
-# GitHub Pages 自动部署指南
+# 🚀 部署指南
 
-## 🚀 快速部署
+## 📋 部署前准备
+
+### 1. 环境要求
+- Node.js 16+ 
+- npm 或 yarn
+
+### 2. 智谱AI配置（新功能）
+本项目现已集成智谱AI，需要配置API Key：
+
+1. **获取API Key**
+   - 访问 [智谱AI开放平台](https://open.bigmodel.cn/)
+   - 注册并创建API Key
+
+2. **本地开发配置**
+   ```bash
+   # 复制环境变量模板
+   cp .env.example .env
+   
+   # 编辑 .env 文件，填入你的API Key
+   ZHIPU_API_KEY=你的智谱AI密钥
+   ```
+
+3. **启动项目**
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+## 🔧 功能说明
+
+### 智能降级机制
+- ✅ **有API Key**：使用智谱AI生成个性化内容
+- ⚠️ **无API Key**：自动降级到随机数据库（内容带"r"前缀）
+
+### 数据源指示器
+- 🟢 绿色 = 智谱AI生成
+- 🔵 蓝色 = 随机数据库
+
+### 调试工具
+- 开发环境下点击右下角🔧查看API调用日志
+
+## 🌐 GitHub Pages 自动部署
 
 ### 第一步：启用GitHub Pages
 1. 进入你的GitHub仓库
@@ -12,7 +53,7 @@
 ### 第二步：推送代码触发部署
 ```bash
 git add .
-git commit -m "Deploy to GitHub Pages"
+git commit -m "集成智谱AI功能"
 git push origin main
 ```
 
@@ -24,40 +65,27 @@ git push origin main
 ### 第四步：访问网站
 部署成功后，你的网站将在以下地址可用：
 ```
-https://[你的GitHub用户名].github.io/[仓库名]/
+https://harper-zh.github.io/vita-me/
 ```
 
-## 📋 部署要求
+## 📝 重要注意事项
 
-- ✅ 仓库必须是公开的（或有GitHub Pro账户）
-- ✅ 代码推送到 `main` 或 `master` 分支
-- ✅ 项目能够正常构建（`npm run build` 成功）
+### API Key安全
+1. **不要将 `.env` 文件提交到Git**（已在.gitignore中排除）
+2. **生产环境配置**：GitHub Pages部署时不包含API Key，会自动使用随机数据库
+3. **如需在生产环境使用AI**：需要在GitHub仓库设置中配置环境变量
 
-## 🔧 本地测试
-
-在推送前，建议先本地测试：
-
-```bash
-# 安装依赖
-npm install
-
-# 构建项目
-npm run build
-
-# 预览构建结果
-npm run preview
-```
-
-## 🎯 自动化流程
-
-每次推送到main分支时，系统会自动：
-1. 检出代码
-2. 安装Node.js和依赖
-3. 构建项目
-4. 部署到GitHub Pages
-5. 更新在线网站
+### 成本控制
+- 智谱AI按Token计费
+- 每次解读约消耗800-1200 Token
+- 可在 `services/zhipuService.ts` 中调整参数
 
 ## 🛠️ 故障排除
+
+### 显示"随机数据库"但已配置API Key
+1. 检查 `.env` 文件位置和格式
+2. 重启开发服务器
+3. 查看调试面板的错误信息
 
 ### 构建失败
 - 检查代码语法错误
@@ -69,11 +97,6 @@ npm run preview
 - 清除浏览器缓存
 - 确认仓库是公开的
 
-### 页面显示空白
-- 检查浏览器控制台是否有错误
-- 确认所有资源路径正确
-- 检查API密钥等环境变量
-
 ## 📊 监控部署
 
 - **GitHub Actions**: 查看详细构建日志
@@ -81,5 +104,9 @@ npm run preview
 - **仓库首页**: 查看最新提交的部署状态
 
 ---
+
+更多详细信息请查看：
+- `API_GUIDE.md` - 智谱AI使用指南
+- `INTEGRATION_COMPLETE.md` - 集成完成说明
 
 现在你只需要推送代码，就能自动部署到GitHub Pages！ 🎉
