@@ -12,6 +12,8 @@ import { defaultInterpretation, defaultWuxingInsight } from '../data/defaultCont
 import { ChevronLeft, Share2, Sparkles, Wind, Zap, Fingerprint, Sun, Coffee, Music, DollarSign, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FluidEnergyField } from '../components/FluidEnergyField';
+import { WealthReport } from '../components/WealthReport';
+import { ExpandableCard } from '../components/ExpandableCard';
 
 // API状态类型
 type ApiStatus = 'connecting' | 'generating' | 'success' | 'error';
@@ -122,6 +124,14 @@ const Result: React.FC = () => {
 
   // 五行数据用于流体能量场
   const [wuxingData, setWuxingData] = useState<any>({});
+
+  // 卡片展开状态管理
+  const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
+
+  // 切换卡片展开状态
+  const handleCardToggle = (cardId: string) => {
+    setExpandedCardId(prev => prev === cardId ? null : cardId);
+  };
 
   // 使用 ref 来跟踪是否已经发起请求，防止重复调用（React StrictMode 在开发模式下会执行两次）
   const hasFetchedRef = useRef(false);
@@ -396,21 +406,21 @@ const Result: React.FC = () => {
         </section>
 
         {/* AI 性格解读 */}
-        <GlassCard className="relative overflow-hidden group" delay={0.4}>
-          <div className="absolute -top-6 -right-6 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-            <Wind size={120} className="text-primary" />
-          </div>
-          
-          <div className="space-y-6 relative z-10">
+        <ExpandableCard
+          id="personality"
+          title="妳的性格底色"
+          summary={aiData?.personality ? aiData.personality.substring(0, 100) + '...' : '正在生成性格分析...'}
+          isExpanded={expandedCardId === 'personality'}
+          onToggle={handleCardToggle}
+          delay={0.4}
+          icon={
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold">
               <Zap size={14} />
               <span>AI 生命能量解读</span>
             </div>
-            
+          }
+          content={
             <div className="space-y-4">
-              <div className="flex items-start justify-between">
-                <h3 className="text-2xl font-serif-sc text-sage-600 font-bold">妳的性格底色</h3>
-              </div>
               {aiData?.personality ? (
                 <TypewriterText
                   text={aiData.personality}
@@ -421,8 +431,8 @@ const Result: React.FC = () => {
                 <SkeletonCard lines={4} />
               )}
             </div>
-          </div>
-        </GlassCard>
+          }
+        />
 
         {/* 维生素建议卡片 */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -484,65 +494,65 @@ const Result: React.FC = () => {
         </section>
 
         {/* 五行流体能量场 */}
-        <GlassCard className="relative overflow-hidden border-none bg-gradient-to-br from-white/60 to-sage-50/40" delay={0.7}>
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl w-fit">
-                <Zap size={20} className="text-primary" />
-              </div>
-              <div>
-                <h4 className="text-lg font-serif-sc text-sage-600 font-bold tracking-wide">
-                  五行能量场
-                </h4>
-                <p className="text-xs text-gray-400 tracking-widest">
-                  ELEMENTAL ENERGY RESONANCE
-                </p>
+        <ExpandableCard
+          id="wuxing"
+          title="五行能量场"
+          summary={aiData?.elementBalance ? aiData.elementBalance.substring(0, 100) + '...' : '正在分析五行能量...'}
+          isExpanded={expandedCardId === 'wuxing'}
+          onToggle={handleCardToggle}
+          delay={0.7}
+          className="border-none bg-gradient-to-br from-white/60 to-sage-50/40"
+          icon={
+            <div className="p-3 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl w-fit">
+              <Zap size={20} className="text-primary" />
+            </div>
+          }
+          badge={
+            <span className="text-xs text-gray-400 tracking-widest">ELEMENTAL ENERGY</span>
+          }
+          content={
+            <div className="space-y-6">
+              <FluidEnergyField data={wuxingData} />
+              
+              {/* 能量解读 */}
+              <div className="bg-white/40 rounded-xl p-4 backdrop-blur-sm">
+                <div className="space-y-2">
+                  <h4 className="text-sm font-bold text-sage-700 tracking-wide">
+                    五行能量状态
+                  </h4>
+                  {aiData?.elementBalance ? (
+                    <TypewriterText
+                      text={aiData.elementBalance}
+                      speed={30}
+                      className="text-xs text-sage-600 leading-relaxed"
+                    />
+                  ) : (
+                    <SkeletonCard lines={2} className="bg-transparent shadow-none border-none p-0" />
+                  )}
+                </div>
               </div>
             </div>
-            
-            <FluidEnergyField data={wuxingData} />
-            
-            {/* 能量解读 */}
-            <div className="bg-white/40 rounded-xl p-4 backdrop-blur-sm">
-              <div className="space-y-2">
-                <h4 className="text-sm font-bold text-sage-700 tracking-wide">
-                  五行能量状态
-                </h4>
-                {aiData?.elementBalance ? (
-                  <TypewriterText
-                    text={aiData.elementBalance}
-                    speed={30}
-                    className="text-xs text-sage-600 leading-relaxed"
-                  />
-                ) : (
-                  <SkeletonCard lines={2} className="bg-transparent shadow-none border-none p-0" />
-                )}
-              </div>
-            </div>
-          </div>
-        </GlassCard>
+          }
+        />
 
         {/* 今日搞钱建议 */}
         {aiData?.wealth ? (
-          <GlassCard className="relative overflow-hidden group bg-gradient-to-br from-[#FAF9F6] to-[#E8DFD2] border border-[#E6DCCD] shadow-[0_4px_20px_rgba(180,160,140,0.15)]" delay={0.8}>
-            <div className="absolute -top-6 -right-6 p-4 opacity-8 group-hover:opacity-12 transition-opacity">
-              <TrendingUp size={120} className="text-[#B5A695]" />
-            </div>
-            
-            <div className="absolute top-4 right-4 w-16 h-16 rounded-full border border-[#C6B299] opacity-4">
-              <div className="absolute inset-2 rounded-full border border-[#B5A695] opacity-60"></div>
-            </div>
-            
-            <div className="space-y-6 relative z-10">
+          <ExpandableCard
+            id="wealth"
+            title="财运密码"
+            summary={aiData.wealth.advice ? aiData.wealth.advice.substring(0, 100) + '...' : '正在分析财运...'}
+            isExpanded={expandedCardId === 'wealth'}
+            onToggle={handleCardToggle}
+            delay={0.8}
+            className="bg-gradient-to-br from-[#FAF9F6] to-[#E8DFD2] border border-[#E6DCCD] shadow-[0_4px_20px_rgba(180,160,140,0.15)]"
+            icon={
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/60 text-[#6B5E51] rounded-full text-xs font-semibold">
                 <DollarSign size={14} />
-                <span>{aiData.wealth.title}</span>
+                {/* <span>{aiData.wealth.title}</span> */}
               </div>
-              
+            }
+            content={
               <div className="space-y-4">
-                <div className="flex items-start justify-between">
-                  <h3 className="text-xl font-serif-sc text-[#6B5E51] font-bold">财运密码</h3>
-                </div>
                 <TypewriterText
                   text={aiData.wealth.advice}
                   speed={30}
@@ -565,59 +575,112 @@ const Result: React.FC = () => {
                   <p className="text-sm text-[#8C8174]">{aiData.wealth.suggestion}</p>
                 </div>
               </div>
-            </div>
-          </GlassCard>
+            }
+          />
         ) : (
           <SkeletonCard lines={5} delay={0.8} className="bg-gradient-to-br from-[#FAF9F6] to-[#E8DFD2]" />
         )}
 
-        {/* 今日养生建议 */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2 px-1">
-            <Sun size={16} className="text-amber-400" />
-            <span className="text-[10px] uppercase tracking-widest font-bold text-gray-400">每日养生建议</span>
-          </div>
-          
-          <div className="space-y-4">
-            {/* 晨间能量 */}
-            {aiData?.health?.morning ? (
-              <GlassCard className="p-4 flex items-center gap-4" delay={0.9}>
-                <div className="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center">
-                  <Coffee className="text-amber-500" size={24} />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-sage-700">{aiData.health.morning.action}</p>
-                  <TypewriterText
-                    text={aiData.health.morning.benefit}
-                    speed={30}
-                    className="text-xs text-gray-400"
-                  />
-                </div>
-              </GlassCard>
-            ) : (
-              <SkeletonCard lines={2} delay={0.9} />
-            )}
+        {/* 财运报告模块 */}
+        {aiData?.modules ? (
+          <ExpandableCard
+            id="wealth-report"
+            title="2026 财运报告"
+            summary={aiData?.modules?.overview?.comment 
+              ? aiData.modules.overview.comment.substring(0, 100) + '...'
+              : `综合财运指数：${aiData?.modules?.overview?.total_score || 0}分 | ${aiData?.modules?.overview?.tier_tag || '分析中...'}`}
+            isExpanded={expandedCardId === 'wealth-report'}
+            onToggle={handleCardToggle}
+            delay={0.85}
+            icon={
+              <div className="relative">
+                <DollarSign size={16} className="text-amber-500" />
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                  className="absolute -top-1 -right-1 text-[10px]"
+                >
+                  ✨
+                </motion.div>
+              </div>
+            }
+            badge={
+              <div className="flex items-center gap-1.5 px-2 py-0.5 bg-amber-50/50 rounded-full border border-amber-200/30">
+                <motion.span
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="text-sm"
+                >
+                  🐴
+                </motion.span>
+                <span className="text-[10px] text-amber-600 font-medium">马年开运</span>
+              </div>
+            }
+            content={
+              <WealthReport data={aiData} delay={0} />
+            }
+          />
+        ) : (
+          <SkeletonCard lines={8} delay={0.85} />
+        )}
 
-            {/* 心流时刻 */}
-            {aiData?.health?.flow ? (
-              <GlassCard className="p-4 flex items-center gap-4" delay={1.0}>
-                <div className="w-12 h-12 bg-sage-50 rounded-2xl flex items-center justify-center">
-                  <Music className="text-primary" size={24} />
+        {/* 今日养生建议 */}
+        <ExpandableCard
+          id="health"
+          title="每日养生建议"
+          summary={aiData?.health?.morning?.action && aiData?.health?.flow?.action 
+            ? `${aiData.health.morning.action} | ${aiData.health.flow.action}`
+            : '正在生成养生建议...'}
+          isExpanded={expandedCardId === 'health'}
+          onToggle={handleCardToggle}
+          delay={0.9}
+          icon={
+            <div className="flex items-center gap-2">
+              <Sun size={16} className="text-amber-400" />
+            </div>
+          }
+          content={
+            <div className="space-y-4">
+              {/* 晨间能量 */}
+              {aiData?.health?.morning ? (
+                <div className="p-4 flex items-center gap-4 bg-amber-50/30 rounded-xl">
+                  <div className="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <Coffee className="text-amber-500" size={24} />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-sage-700 mb-2">{aiData.health.morning.action}</p>
+                    <TypewriterText
+                      text={aiData.health.morning.benefit}
+                      speed={30}
+                      className="text-xs text-gray-400"
+                    />
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-sage-700">{aiData.health.flow.action}</p>
-                  <TypewriterText
-                    text={aiData.health.flow.benefit}
-                    speed={30}
-                    className="text-xs text-gray-400"
-                  />
+              ) : (
+                <SkeletonCard lines={2} className="bg-transparent shadow-none border-none p-0" />
+              )}
+
+              {/* 心流时刻 */}
+              {aiData?.health?.flow ? (
+                <div className="p-4 flex items-center gap-4 bg-sage-50/30 rounded-xl">
+                  <div className="w-12 h-12 bg-sage-50 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <Music className="text-primary" size={24} />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-sage-700 mb-2">{aiData.health.flow.action}</p>
+                    <TypewriterText
+                      text={aiData.health.flow.benefit}
+                      speed={30}
+                      className="text-xs text-gray-400"
+                    />
+                  </div>
                 </div>
-              </GlassCard>
-            ) : (
-              <SkeletonCard lines={2} delay={1.0} />
-            )}
-          </div>
-        </section>
+              ) : (
+                <SkeletonCard lines={2} className="bg-transparent shadow-none border-none p-0" />
+              )}
+            </div>
+          }
+        />
 
 
 
