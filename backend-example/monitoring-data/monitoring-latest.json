@@ -1,642 +1,19 @@
 {
-  "timestamp": "2025-12-31T13:01:32.925Z",
+  "timestamp": "2026-02-05T03:16:54.302Z",
   "appName": "vita-me",
   "version": "1.0.0",
   "statistics": {
     "totalSessions": 50,
-    "totalTime": 15648620,
-    "averageSessionTime": 312972.4,
+    "totalTime": 16699911,
+    "averageSessionTime": 333998.22,
     "mostVisitedPage": "未知页面",
-    "totalPageViews": 205,
+    "totalPageViews": 245,
     "pageVisits": {
-      "首页": 43,
-      "未知页面": 162
+      "首页": 40,
+      "未知页面": 205
     }
   },
   "sessions": [
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767175263836_dptmnijmz",
-      "startTime": 1767175263837,
-      "totalDuration": 249545,
-      "pages": [],
-      "endTime": 1767175513382
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767175514085_xr7snvtsb",
-      "startTime": 1767175514085,
-      "totalDuration": 507647,
-      "pages": [],
-      "endTime": 1767176021732
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767176021733_305on5xzl",
-      "startTime": 1767176021733,
-      "totalDuration": 728236,
-      "pages": [
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767176021733,
-          "duration": 313847,
-          "interactions": 0,
-          "endTime": 1767176335580
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767176335580,
-          "duration": 987,
-          "interactions": 7,
-          "endTime": 1767176336567
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767176748062,
-          "duration": 1907,
-          "interactions": 29,
-          "endTime": 1767176749969
-        }
-      ],
-      "endTime": 1767176749969
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767176412381_x4drzk6n1",
-      "startTime": 1767176412381,
-      "totalDuration": 1686323,
-      "pages": [
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767176412382,
-          "duration": 17001,
-          "interactions": 403,
-          "endTime": 1767176429383
-        },
-        {
-          "path": "/result?date=2025-12-10&time=12:00&vitaminId=amanda&province=%E8%BE%BD%E5%AE%81%E7%9C%81&city=%E8%90%A5%E5%8F%A3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176429383,
-          "duration": 52610,
-          "interactions": 256,
-          "endTime": 1767176481993
-        },
-        {
-          "path": "/result?date=2025-12-10&time=12:00&vitaminId=amanda&province=%E8%BE%BD%E5%AE%81%E7%9C%81&city=%E8%90%A5%E5%8F%A3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176490195,
-          "duration": 984,
-          "interactions": 0,
-          "endTime": 1767176491179
-        },
-        {
-          "path": "/result?date=2025-12-10&time=12:00&vitaminId=amanda&province=%E8%BE%BD%E5%AE%81%E7%9C%81&city=%E8%90%A5%E5%8F%A3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176701938,
-          "duration": 1905,
-          "interactions": 36,
-          "endTime": 1767176703843
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767176703843,
-          "duration": 11549,
-          "interactions": 270,
-          "endTime": 1767176715392
-        },
-        {
-          "path": "/result?date=2025-12-26&time=12:00&vitaminId=xjw&province=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA&city=%E4%B9%8C%E5%85%B0%E5%AF%9F%E5%B8%83%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176715392,
-          "duration": 21083,
-          "interactions": 247,
-          "endTime": 1767176736475
-        },
-        {
-          "path": "/result?date=2025-12-26&time=12:00&vitaminId=xjw&province=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA&city=%E4%B9%8C%E5%85%B0%E5%AF%9F%E5%B8%83%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176753255,
-          "duration": 1136,
-          "interactions": 0,
-          "endTime": 1767176754391
-        },
-        {
-          "path": "/result?date=2025-12-26&time=12:00&vitaminId=xjw&province=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA&city=%E4%B9%8C%E5%85%B0%E5%AF%9F%E5%B8%83%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176756350,
-          "duration": 3469,
-          "interactions": 79,
-          "endTime": 1767176759819
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767176759819,
-          "duration": 20570,
-          "interactions": 280,
-          "endTime": 1767176780389
-        },
-        {
-          "path": "/result?date=2025-12-31&time=12:00&vitaminId=xjw&province=%E5%90%89%E6%9E%97%E7%9C%81&city=%E7%99%BD%E5%B1%B1%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176780389,
-          "duration": 40746,
-          "interactions": 243,
-          "endTime": 1767176821135
-        },
-        {
-          "path": "/result?date=2025-12-31&time=12:00&vitaminId=xjw&province=%E5%90%89%E6%9E%97%E7%9C%81&city=%E7%99%BD%E5%B1%B1%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176830725,
-          "duration": 2352,
-          "interactions": 63,
-          "endTime": 1767176833077
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767176833077,
-          "duration": 31311,
-          "interactions": 516,
-          "endTime": 1767176864388
-        },
-        {
-          "path": "/result?date=2006-06-30&time=05:00&vitaminId=xjw&province=%E8%BE%BD%E5%AE%81%E7%9C%81&city=%E8%90%A5%E5%8F%A3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176864388,
-          "duration": 21291,
-          "interactions": 274,
-          "endTime": 1767176885679
-        },
-        {
-          "path": "/result?date=2006-06-30&time=05:00&vitaminId=xjw&province=%E8%BE%BD%E5%AE%81%E7%9C%81&city=%E8%90%A5%E5%8F%A3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176953337,
-          "duration": 2071,
-          "interactions": 38,
-          "endTime": 1767176955408
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767176955408,
-          "duration": 36986,
-          "interactions": 329,
-          "endTime": 1767176992394
-        },
-        {
-          "path": "/result?date=2003-07-28&time=02:00&vitaminId=xjw1234567654345&province=%E8%BE%BD%E5%AE%81%E7%9C%81&city=%E5%A4%A7%E8%BF%9E%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767176992395,
-          "duration": 118929,
-          "interactions": 375,
-          "endTime": 1767177111324
-        },
-        {
-          "path": "/result?date=2003-07-28&time=02:00&vitaminId=xjw1234567654345&province=%E8%BE%BD%E5%AE%81%E7%9C%81&city=%E5%A4%A7%E8%BF%9E%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767178005600,
-          "duration": 2543,
-          "interactions": 61,
-          "endTime": 1767178008143
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767178008143,
-          "duration": 3325,
-          "interactions": 84,
-          "endTime": 1767178011468
-        }
-      ],
-      "endTime": 1767178098704
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767178100908_gdosgbmba",
-      "startTime": 1767178100908,
-      "totalDuration": 178770,
-      "pages": [
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767178100909,
-          "duration": 123531,
-          "interactions": 0,
-          "endTime": 1767178224440
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767178224440,
-          "duration": 931,
-          "interactions": 5,
-          "endTime": 1767178225371
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767178277945,
-          "duration": 1733,
-          "interactions": 40,
-          "endTime": 1767178279678
-        }
-      ],
-      "endTime": 1767178279678
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767178674208_l7803vpad",
-      "startTime": 1767178674208,
-      "totalDuration": 14379,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178674209,
-          "duration": 2381,
-          "interactions": 61,
-          "endTime": 1767178676590
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178680347,
-          "duration": 1746,
-          "interactions": 0,
-          "endTime": 1767178682093
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178686778,
-          "duration": 1808,
-          "interactions": 36,
-          "endTime": 1767178688586
-        }
-      ],
-      "endTime": 1767178688587
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "vitaMeId": "1",
-      "sessionId": "session_1767178619994_4vry0o168",
-      "startTime": 1767178619994,
-      "totalDuration": 130464,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178619995,
-          "duration": 14589,
-          "interactions": 266,
-          "endTime": 1767178634584
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178642571,
-          "duration": 4428,
-          "interactions": 79,
-          "endTime": 1767178646999
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767178646999,
-          "duration": 9000,
-          "interactions": 314,
-          "endTime": 1767178655999
-        },
-        {
-          "path": "/result?date=2025-12-03&time=12:00&vitaminId=1&province=%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81&city=%E9%BB%91%E6%B2%B3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767178655999,
-          "duration": 9827,
-          "interactions": 220,
-          "endTime": 1767178665826
-        },
-        {
-          "path": "/result?date=2025-12-03&time=12:00&vitaminId=1&province=%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81&city=%E9%BB%91%E6%B2%B3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767178666381,
-          "duration": 656,
-          "interactions": 0,
-          "endTime": 1767178667037
-        },
-        {
-          "path": "/result?date=2025-12-03&time=12:00&vitaminId=1&province=%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81&city=%E9%BB%91%E6%B2%B3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767178668675,
-          "duration": 1378,
-          "interactions": 30,
-          "endTime": 1767178670053
-        },
-        {
-          "path": "/result?date=2025-12-03&time=12:00&vitaminId=1&province=%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81&city=%E9%BB%91%E6%B2%B3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767178677483,
-          "duration": 2858,
-          "interactions": 57,
-          "endTime": 1767178680341
-        },
-        {
-          "path": "/result?date=2025-12-03&time=12:00&vitaminId=1&province=%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81&city=%E9%BB%91%E6%B2%B3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767178682101,
-          "duration": 4671,
-          "interactions": 128,
-          "endTime": 1767178686772
-        },
-        {
-          "path": "/result?date=2025-12-03&time=12:00&vitaminId=1&province=%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81&city=%E9%BB%91%E6%B2%B3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767178733475,
-          "duration": 1553,
-          "interactions": 38,
-          "endTime": 1767178735028
-        },
-        {
-          "path": "/result?date=2025-12-03&time=12:00&vitaminId=1&province=%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81&city=%E9%BB%91%E6%B2%B3%E5%B8%82",
-          "pageName": "未知页面",
-          "startTime": 1767178749990,
-          "duration": 468,
-          "interactions": 0,
-          "endTime": 1767178750458
-        }
-      ],
-      "endTime": 1767178750458
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767178688938_j18qwxmzb",
-      "startTime": 1767178688938,
-      "totalDuration": 63758,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178688938,
-          "duration": 2012,
-          "interactions": 26,
-          "endTime": 1767178690950
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767178690951,
-          "duration": 942,
-          "interactions": 29,
-          "endTime": 1767178691893
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767178735035,
-          "duration": 877,
-          "interactions": 0,
-          "endTime": 1767178735912
-        },
-        {
-          "path": "/",
-          "pageName": "首页",
-          "startTime": 1767178750475,
-          "duration": 2221,
-          "interactions": 7,
-          "endTime": 1767178752696
-        }
-      ],
-      "endTime": 1767178752696
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767178695522_xkieb59oz",
-      "startTime": 1767178695522,
-      "totalDuration": 185496,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178695522,
-          "duration": 10594,
-          "interactions": 139,
-          "endTime": 1767178706116
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178719309,
-          "duration": 8456,
-          "interactions": 60,
-          "endTime": 1767178727765
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178731854,
-          "duration": 1611,
-          "interactions": 0,
-          "endTime": 1767178733465
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178878583,
-          "duration": 2435,
-          "interactions": 38,
-          "endTime": 1767178881018
-        }
-      ],
-      "endTime": 1767178881018
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767178881686_keapzwx91",
-      "startTime": 1767178881686,
-      "totalDuration": 7011,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178881686,
-          "duration": 7011,
-          "interactions": 179,
-          "endTime": 1767178888697
-        }
-      ],
-      "endTime": 1767178888697
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767178889035_kg881qwxn",
-      "startTime": 1767178889035,
-      "totalDuration": 25578,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178889035,
-          "duration": 13356,
-          "interactions": 130,
-          "endTime": 1767178902391
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178911986,
-          "duration": 2627,
-          "interactions": 31,
-          "endTime": 1767178914613
-        }
-      ],
-      "endTime": 1767178914613
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767178915033_2axhcjbfd",
-      "startTime": 1767178915033,
-      "totalDuration": 176062,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178915033,
-          "duration": 9950,
-          "interactions": 97,
-          "endTime": 1767178924983
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767178928175,
-          "duration": 1163,
-          "interactions": 2,
-          "endTime": 1767178929338
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767179089767,
-          "duration": 1327,
-          "interactions": 15,
-          "endTime": 1767179091094
-        }
-      ],
-      "endTime": 1767179091095
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767179092255_g6wr6vr3m",
-      "startTime": 1767179092255,
-      "totalDuration": 6198,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767179092256,
-          "duration": 6197,
-          "interactions": 51,
-          "endTime": 1767179098453
-        }
-      ],
-      "endTime": 1767179098453
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767179102242_jpwbd5or7",
-      "startTime": 1767179102242,
-      "totalDuration": 179377,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767179102242,
-          "duration": 8512,
-          "interactions": 99,
-          "endTime": 1767179110754
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767179114584,
-          "duration": 1661,
-          "interactions": 0,
-          "endTime": 1767179116245
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767179277151,
-          "duration": 4467,
-          "interactions": 59,
-          "endTime": 1767179281618
-        }
-      ],
-      "endTime": 1767179281619
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767179491616_1imq8a1zs",
-      "startTime": 1767179491616,
-      "totalDuration": 482056,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767179491617,
-          "duration": 16846,
-          "interactions": 351,
-          "endTime": 1767179508463
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767179964034,
-          "duration": 9638,
-          "interactions": 139,
-          "endTime": 1767179973672
-        }
-      ],
-      "endTime": 1767179973672
-    },
-    {
-      "userId": "user_1767171527694_dmiyhedph",
-      "sessionId": "session_1767179282959_gtd7uz7lw",
-      "startTime": 1767179282959,
-      "totalDuration": 703302,
-      "pages": [
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767179282960,
-          "duration": 4139,
-          "interactions": 18,
-          "endTime": 1767179287099
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767179487405,
-          "duration": 1200,
-          "interactions": 3,
-          "endTime": 1767179488605
-        },
-        {
-          "path": "/export",
-          "pageName": "未知页面",
-          "startTime": 1767179978676,
-          "duration": 7585,
-          "interactions": 167,
-          "endTime": 1767179986261
-        }
-      ],
-      "endTime": 1767179986261
-    },
     {
       "userId": "user_1767171527694_dmiyhedph",
       "vitaMeId": "amanda",
@@ -2110,10 +1487,960 @@
         }
       ],
       "endTime": 1767184841711
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "sessionId": "session_1767184842339_39tyc6y9g",
+      "startTime": 1767184842339,
+      "totalDuration": 1318448,
+      "pages": [
+        {
+          "path": "/result?date=2025-12-19&time=12:00&vitaminId=23432&province=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA&city=%E5%91%BC%E4%BC%A6%E8%B4%9D%E5%B0%94%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1767184842339,
+          "duration": 628,
+          "interactions": 4,
+          "endTime": 1767184842967
+        }
+      ],
+      "endTime": 1767186160787
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "sessionId": "session_1767184780348_c9e2rtau1",
+      "startTime": 1767184780348,
+      "totalDuration": 1380446,
+      "pages": [
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1767184780348,
+          "duration": 1203,
+          "interactions": 11,
+          "endTime": 1767184781551
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1767184785082,
+          "duration": 3402,
+          "interactions": 72,
+          "endTime": 1767184788484
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1767184803317,
+          "duration": 2150,
+          "interactions": 51,
+          "endTime": 1767184805467
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1767184843680,
+          "duration": 360173,
+          "interactions": 140,
+          "endTime": 1767185203853
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1767185733329,
+          "duration": 38997,
+          "interactions": 114,
+          "endTime": 1767185772326
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1767185982012,
+          "duration": 5792,
+          "interactions": 19,
+          "endTime": 1767185987804
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1767186038852,
+          "duration": 30087,
+          "interactions": 112,
+          "endTime": 1767186068939
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1767186072959,
+          "duration": 1396,
+          "interactions": 0,
+          "endTime": 1767186074355
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1767186091790,
+          "duration": 1135,
+          "interactions": 0,
+          "endTime": 1767186092925
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1767186128114,
+          "duration": 613,
+          "interactions": 9,
+          "endTime": 1767186128727
+        }
+      ],
+      "endTime": 1767186160794
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "sessionId": "session_1770258123444_tgge530q8",
+      "startTime": 1770258123444,
+      "totalDuration": 217938,
+      "pages": [
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258123444,
+          "duration": 16249,
+          "interactions": 321,
+          "endTime": 1770258139693
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258152086,
+          "duration": 1382,
+          "interactions": 23,
+          "endTime": 1770258153468
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258159549,
+          "duration": 447,
+          "interactions": 0,
+          "endTime": 1770258159996
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258273054,
+          "duration": 11219,
+          "interactions": 48,
+          "endTime": 1770258284273
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258299978,
+          "duration": 1919,
+          "interactions": 14,
+          "endTime": 1770258301897
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258307999,
+          "duration": 504,
+          "interactions": 0,
+          "endTime": 1770258308503
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258309326,
+          "duration": 2467,
+          "interactions": 0,
+          "endTime": 1770258311793
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258312387,
+          "duration": 4670,
+          "interactions": 23,
+          "endTime": 1770258317057
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258339023,
+          "duration": 2359,
+          "interactions": 11,
+          "endTime": 1770258341382
+        }
+      ],
+      "endTime": 1770258341382
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "vitaMeId": "333",
+      "sessionId": "session_1770257191660_2e33e1r5v",
+      "startTime": 1770257191660,
+      "totalDuration": 1374885,
+      "pages": [
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770257191660,
+          "duration": 3001,
+          "interactions": 44,
+          "endTime": 1770257194661
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770257328970,
+          "duration": 930,
+          "interactions": 10,
+          "endTime": 1770257329900
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770257797580,
+          "duration": 9002,
+          "interactions": 269,
+          "endTime": 1770257806582
+        },
+        {
+          "path": "/result?date=2026-02-11&time=12:00&vitaminId=1&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E9%95%87%E6%B1%9F%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770257806583,
+          "duration": 19503,
+          "interactions": 326,
+          "endTime": 1770257826086
+        },
+        {
+          "path": "/result?date=2026-02-11&time=12:00&vitaminId=1&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E9%95%87%E6%B1%9F%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770257826663,
+          "duration": 1264,
+          "interactions": 0,
+          "endTime": 1770257827927
+        },
+        {
+          "path": "/result?date=2026-02-11&time=12:00&vitaminId=1&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E9%95%87%E6%B1%9F%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770257918078,
+          "duration": 884,
+          "interactions": 7,
+          "endTime": 1770257918962
+        },
+        {
+          "path": "/result?date=2026-02-11&time=12:00&vitaminId=1&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E9%95%87%E6%B1%9F%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258093447,
+          "duration": 460,
+          "interactions": 0,
+          "endTime": 1770258093907
+        },
+        {
+          "path": "/result?date=2026-02-11&time=12:00&vitaminId=1&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E9%95%87%E6%B1%9F%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258095059,
+          "duration": 3554,
+          "interactions": 0,
+          "endTime": 1770258098613
+        },
+        {
+          "path": "/result?date=2026-02-11&time=12:00&vitaminId=1&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E9%95%87%E6%B1%9F%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258118727,
+          "duration": 1159,
+          "interactions": 11,
+          "endTime": 1770258119886
+        },
+        {
+          "path": "/result?date=2026-02-11&time=12:00&vitaminId=1&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E9%95%87%E6%B1%9F%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258302822,
+          "duration": 5167,
+          "interactions": 56,
+          "endTime": 1770258307989
+        },
+        {
+          "path": "/result?date=2026-02-11&time=12:00&vitaminId=1&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E9%95%87%E6%B1%9F%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258317540,
+          "duration": 1915,
+          "interactions": 35,
+          "endTime": 1770258319455
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770258319455,
+          "duration": 13022,
+          "interactions": 325,
+          "endTime": 1770258332477
+        },
+        {
+          "path": "/result?date=2026-02-20&time=16:02&vitaminId=333&province=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA&city=%E5%B7%B4%E5%BD%A6%E6%B7%96%E5%B0%94%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258332477,
+          "duration": 5287,
+          "interactions": 29,
+          "endTime": 1770258337764
+        },
+        {
+          "path": "/result?date=2026-02-20&time=16:02&vitaminId=333&province=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA&city=%E5%B7%B4%E5%BD%A6%E6%B7%96%E5%B0%94%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258363166,
+          "duration": 203379,
+          "interactions": 195,
+          "endTime": 1770258566545
+        }
+      ],
+      "endTime": 1770258566545
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "sessionId": "session_1770258342047_14jdm16rh",
+      "startTime": 1770258342047,
+      "totalDuration": 457541,
+      "pages": [
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258342047,
+          "duration": 21119,
+          "interactions": 269,
+          "endTime": 1770258363166
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258571088,
+          "duration": 27846,
+          "interactions": 192,
+          "endTime": 1770258598934
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258746782,
+          "duration": 3941,
+          "interactions": 88,
+          "endTime": 1770258750723
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258758102,
+          "duration": 2613,
+          "interactions": 51,
+          "endTime": 1770258760715
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258795623,
+          "duration": 3965,
+          "interactions": 83,
+          "endTime": 1770258799588
+        }
+      ],
+      "endTime": 1770258799588
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "vitaMeId": "336399",
+      "sessionId": "session_1770258567449_jsrbsbh0f",
+      "startTime": 1770258567449,
+      "totalDuration": 259657,
+      "pages": [
+        {
+          "path": "/result?date=2026-02-20&time=16:02&vitaminId=333&province=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA&city=%E5%B7%B4%E5%BD%A6%E6%B7%96%E5%B0%94%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258567449,
+          "duration": 1334,
+          "interactions": 14,
+          "endTime": 1770258568783
+        },
+        {
+          "path": "/result?date=2026-02-20&time=16:02&vitaminId=333&province=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA&city=%E5%B7%B4%E5%BD%A6%E6%B7%96%E5%B0%94%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258740627,
+          "duration": 5496,
+          "interactions": 138,
+          "endTime": 1770258746123
+        },
+        {
+          "path": "/result?date=2026-02-20&time=16:02&vitaminId=333&province=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA&city=%E5%B7%B4%E5%BD%A6%E6%B7%96%E5%B0%94%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258751656,
+          "duration": 4774,
+          "interactions": 59,
+          "endTime": 1770258756430
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770258756430,
+          "duration": 836,
+          "interactions": 19,
+          "endTime": 1770258757266
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770258761640,
+          "duration": 15790,
+          "interactions": 290,
+          "endTime": 1770258777430
+        },
+        {
+          "path": "/result?date=2026-02-14&time=12:00&vitaminId=336399&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E5%8F%B0%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258777430,
+          "duration": 17640,
+          "interactions": 125,
+          "endTime": 1770258795070
+        },
+        {
+          "path": "/result?date=2026-02-14&time=12:00&vitaminId=336399&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E5%8F%B0%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258824454,
+          "duration": 2652,
+          "interactions": 49,
+          "endTime": 1770258827106
+        }
+      ],
+      "endTime": 1770258827106
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "vitaMeId": "brilliantword",
+      "sessionId": "session_1770258827630_33jisdvge",
+      "startTime": 1770258827630,
+      "totalDuration": 77596,
+      "pages": [
+        {
+          "path": "/result?date=2026-02-14&time=12:00&vitaminId=336399&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E5%8F%B0%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258827630,
+          "duration": 1499,
+          "interactions": 20,
+          "endTime": 1770258829129
+        },
+        {
+          "path": "/result?date=2026-02-14&time=12:00&vitaminId=336399&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E5%8F%B0%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258843221,
+          "duration": 2414,
+          "interactions": 43,
+          "endTime": 1770258845635
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770258845636,
+          "duration": 20003,
+          "interactions": 406,
+          "endTime": 1770258865639
+        },
+        {
+          "path": "/result?date=2026-02-21&time=17:04&vitaminId=brilliantword&province=%E5%AE%89%E5%BE%BD%E7%9C%81&city=%E6%BB%81%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258865639,
+          "duration": 20274,
+          "interactions": 239,
+          "endTime": 1770258885913
+        },
+        {
+          "path": "/result?date=2026-02-21&time=17:04&vitaminId=brilliantword&province=%E5%AE%89%E5%BE%BD%E7%9C%81&city=%E6%BB%81%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258901957,
+          "duration": 3269,
+          "interactions": 87,
+          "endTime": 1770258905226
+        }
+      ],
+      "endTime": 1770258905226
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "sessionId": "session_1770258905952_qxbeqthup",
+      "startTime": 1770258905952,
+      "totalDuration": 35700,
+      "pages": [
+        {
+          "path": "/result?date=2026-02-21&time=17:04&vitaminId=brilliantword&province=%E5%AE%89%E5%BE%BD%E7%9C%81&city=%E6%BB%81%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258905953,
+          "duration": 16638,
+          "interactions": 65,
+          "endTime": 1770258922591
+        },
+        {
+          "path": "/result?date=2026-02-21&time=17:04&vitaminId=brilliantword&province=%E5%AE%89%E5%BE%BD%E7%9C%81&city=%E6%BB%81%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770258930173,
+          "duration": 2054,
+          "interactions": 38,
+          "endTime": 1770258932227
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770258932227,
+          "duration": 1501,
+          "interactions": 32,
+          "endTime": 1770258933728
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770258939593,
+          "duration": 2059,
+          "interactions": 0,
+          "endTime": 1770258941652
+        }
+      ],
+      "endTime": 1770258941652
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "sessionId": "session_1770258800504_suncuqlhi",
+      "startTime": 1770258800504,
+      "totalDuration": 145335,
+      "pages": [
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258800504,
+          "duration": 23948,
+          "interactions": 309,
+          "endTime": 1770258824452
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258829934,
+          "duration": 13285,
+          "interactions": 151,
+          "endTime": 1770258843219
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258887811,
+          "duration": 14142,
+          "interactions": 467,
+          "endTime": 1770258901953
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258923514,
+          "duration": 6656,
+          "interactions": 173,
+          "endTime": 1770258930170
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258934594,
+          "duration": 4995,
+          "interactions": 197,
+          "endTime": 1770258939589
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258943842,
+          "duration": 1997,
+          "interactions": 27,
+          "endTime": 1770258945839
+        }
+      ],
+      "endTime": 1770258945839
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "sessionId": "session_1770258946312_v1einyddz",
+      "startTime": 1770258946312,
+      "totalDuration": 23497,
+      "pages": [
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258946312,
+          "duration": 23497,
+          "interactions": 268,
+          "endTime": 1770258969809
+        }
+      ],
+      "endTime": 1770258969809
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "sessionId": "session_1770258981303_lrat76noz",
+      "startTime": 1770258981303,
+      "totalDuration": 78308,
+      "pages": [
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770258981303,
+          "duration": 78307,
+          "interactions": 574,
+          "endTime": 1770259059610
+        }
+      ],
+      "endTime": 1770259059611
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "vitaMeId": "music-player",
+      "sessionId": "session_1770259126944_xlhf43jfg",
+      "startTime": 1770259126944,
+      "totalDuration": 181541,
+      "pages": [
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770259126945,
+          "duration": 18042,
+          "interactions": 377,
+          "endTime": 1770259144987
+        },
+        {
+          "path": "/result?date=2026-02-21&time=16:00&vitaminId=music-player&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E7%BB%8D%E5%85%B4%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259144988,
+          "duration": 141320,
+          "interactions": 157,
+          "endTime": 1770259286308
+        },
+        {
+          "path": "/result?date=2026-02-21&time=16:00&vitaminId=music-player&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E7%BB%8D%E5%85%B4%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259292523,
+          "duration": 2545,
+          "interactions": 81,
+          "endTime": 1770259295068
+        },
+        {
+          "path": "/result?date=2026-02-21&time=16:00&vitaminId=music-player&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E7%BB%8D%E5%85%B4%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259297489,
+          "duration": 10996,
+          "interactions": 190,
+          "endTime": 1770259308485
+        }
+      ],
+      "endTime": 1770259308485
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "sessionId": "session_1770259309279_mqfl24h1z",
+      "startTime": 1770259309279,
+      "totalDuration": 39934,
+      "pages": [
+        {
+          "path": "/result?date=2026-02-21&time=16:00&vitaminId=music-player&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E7%BB%8D%E5%85%B4%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259309280,
+          "duration": 4504,
+          "interactions": 16,
+          "endTime": 1770259313784
+        },
+        {
+          "path": "/result?date=2026-02-21&time=16:00&vitaminId=music-player&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E7%BB%8D%E5%85%B4%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259334793,
+          "duration": 4497,
+          "interactions": 90,
+          "endTime": 1770259339290
+        },
+        {
+          "path": "/result?date=2026-02-21&time=16:00&vitaminId=music-player&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E7%BB%8D%E5%85%B4%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259346242,
+          "duration": 2971,
+          "interactions": 77,
+          "endTime": 1770259349213
+        }
+      ],
+      "endTime": 1770259349213
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "vitaMeId": "music-player",
+      "sessionId": "session_1770259349658_zskt6uk4r",
+      "startTime": 1770259349658,
+      "totalDuration": 182762,
+      "pages": [
+        {
+          "path": "/result?date=2026-02-21&time=16:00&vitaminId=music-player&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E7%BB%8D%E5%85%B4%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259349658,
+          "duration": 10234,
+          "interactions": 48,
+          "endTime": 1770259359892
+        },
+        {
+          "path": "/result?date=2026-02-21&time=16:00&vitaminId=music-player&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E7%BB%8D%E5%85%B4%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259367453,
+          "duration": 59269,
+          "interactions": 20,
+          "endTime": 1770259426722
+        },
+        {
+          "path": "/result?date=2026-02-21&time=16:00&vitaminId=music-player&province=%E6%B5%99%E6%B1%9F%E7%9C%81&city=%E7%BB%8D%E5%85%B4%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259435100,
+          "duration": 1081,
+          "interactions": 12,
+          "endTime": 1770259436181
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770259436181,
+          "duration": 1287,
+          "interactions": 36,
+          "endTime": 1770259437468
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770259444210,
+          "duration": 13434,
+          "interactions": 253,
+          "endTime": 1770259457644
+        },
+        {
+          "path": "/result?date=2026-02-05&time=12:00&vitaminId=music-player&province=%E6%B1%9F%E8%A5%BF%E7%9C%81&city=%E6%8A%9A%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259457644,
+          "duration": 74776,
+          "interactions": 29,
+          "endTime": 1770259532420
+        }
+      ],
+      "endTime": 1770259532420
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "vitaMeId": "jesus-crist",
+      "sessionId": "session_1770259533340_i18tzxpcu",
+      "startTime": 1770259533340,
+      "totalDuration": 64884,
+      "pages": [
+        {
+          "path": "/result?date=2026-02-05&time=12:00&vitaminId=music-player&province=%E6%B1%9F%E8%A5%BF%E7%9C%81&city=%E6%8A%9A%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259533341,
+          "duration": 8,
+          "interactions": 0,
+          "endTime": 1770259533349
+        },
+        {
+          "path": "/result?date=2026-02-05&time=12:00&vitaminId=music-player&province=%E6%B1%9F%E8%A5%BF%E7%9C%81&city=%E6%8A%9A%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259538426,
+          "duration": 1479,
+          "interactions": 12,
+          "endTime": 1770259539905
+        },
+        {
+          "path": "/",
+          "pageName": "首页",
+          "startTime": 1770259539905,
+          "duration": 12446,
+          "interactions": 229,
+          "endTime": 1770259552351
+        },
+        {
+          "path": "/result?date=2026-02-27&time=12:00&vitaminId=jesus-crist&province=%E7%A6%8F%E5%BB%BA%E7%9C%81&city=%E6%B3%89%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259552351,
+          "duration": 12253,
+          "interactions": 64,
+          "endTime": 1770259564604
+        },
+        {
+          "path": "/result?date=2026-02-27&time=12:00&vitaminId=jesus-crist&province=%E7%A6%8F%E5%BB%BA%E7%9C%81&city=%E6%B3%89%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259577270,
+          "duration": 8962,
+          "interactions": 194,
+          "endTime": 1770259586232
+        },
+        {
+          "path": "/result?date=2026-02-27&time=12:00&vitaminId=jesus-crist&province=%E7%A6%8F%E5%BB%BA%E7%9C%81&city=%E6%B3%89%E5%B7%9E%E5%B8%82",
+          "pageName": "未知页面",
+          "startTime": 1770259596488,
+          "duration": 1736,
+          "interactions": 0,
+          "endTime": 1770259598224
+        }
+      ],
+      "endTime": 1770259598224
+    },
+    {
+      "userId": "user_1767171527694_dmiyhedph",
+      "sessionId": "session_1770259063935_6tc73pzz5",
+      "startTime": 1770259063935,
+      "totalDuration": 537021,
+      "pages": [
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259063936,
+          "duration": 5295,
+          "interactions": 156,
+          "endTime": 1770259069231
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259071642,
+          "duration": 4735,
+          "interactions": 81,
+          "endTime": 1770259076377
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259080103,
+          "duration": 702,
+          "interactions": 14,
+          "endTime": 1770259080805
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259095569,
+          "duration": 10466,
+          "interactions": 200,
+          "endTime": 1770259106035
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259110554,
+          "duration": 2573,
+          "interactions": 63,
+          "endTime": 1770259113127
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259115298,
+          "duration": 1386,
+          "interactions": 0,
+          "endTime": 1770259116684
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259122673,
+          "duration": 904,
+          "interactions": 0,
+          "endTime": 1770259123577
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259286307,
+          "duration": 6202,
+          "interactions": 132,
+          "endTime": 1770259292509
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259295065,
+          "duration": 2415,
+          "interactions": 33,
+          "endTime": 1770259297480
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259313790,
+          "duration": 20997,
+          "interactions": 306,
+          "endTime": 1770259334787
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259339299,
+          "duration": 6937,
+          "interactions": 164,
+          "endTime": 1770259346236
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259359888,
+          "duration": 7562,
+          "interactions": 187,
+          "endTime": 1770259367450
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259426726,
+          "duration": 8365,
+          "interactions": 305,
+          "endTime": 1770259435091
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259437471,
+          "duration": 6730,
+          "interactions": 223,
+          "endTime": 1770259444201
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259533236,
+          "duration": 5177,
+          "interactions": 165,
+          "endTime": 1770259538413
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259564610,
+          "duration": 12653,
+          "interactions": 222,
+          "endTime": 1770259577263
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259586239,
+          "duration": 10240,
+          "interactions": 337,
+          "endTime": 1770259596479
+        },
+        {
+          "path": "/export",
+          "pageName": "未知页面",
+          "startTime": 1770259598231,
+          "duration": 2725,
+          "interactions": 52,
+          "endTime": 1770259600956
+        }
+      ],
+      "endTime": 1770259600956
     }
   ],
   "metadata": {
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
     "language": "zh-CN",
     "timezone": "Asia/Shanghai",
     "screenResolution": "1280x720",
