@@ -64,6 +64,12 @@ const Home: React.FC = () => {
 
   const handleStart = () => {
     if (!date) return;
+    
+    // 如果用户输入了 Vita-Me ID，记录到监控系统
+    if (vitaminId && (window as any).setVitaMeId) {
+      (window as any).setVitaMeId(vitaminId);
+    }
+    
     navigate(`/result?date=${date}&time=${time}&vitaminId=${vitaminId}&province=${province}&city=${city}`);
   };
 

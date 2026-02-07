@@ -24,23 +24,33 @@ export const DebugPanel: React.FC = () => {
       }]);
     };
 
-    console.log = (...args) => {
+    console.log = (...args: any[]) => {
       const message = args.join(' ');
-      if (message.includes('🔮') || message.includes('💰') || message.includes('📡') || message.includes('✅') || message.includes('⚠️') || message.includes('🎲')) {
-        addLog('info', message);
+      // 只显示特定的调试信息，排除监控和API相关日志
+      if (message.includes('🔮') || message.includes('💰')) {
+        // 只显示核心业务逻辑的日志，不显示监控、API调用等
+        if (!message.includes('监控') && !message.includes('上传') && !message.includes('📊') && !message.includes('🔍')) {
+          addLog('info', message);
+        }
       }
       originalLog(...args);
     };
 
-    console.warn = (...args) => {
+    console.warn = (...args: any[]) => {
       const message = args.join(' ');
-      addLog('warning', message);
+      // 排除监控相关的警告
+      if (!message.includes('监控') && !message.includes('上传') && !message.includes('连接')) {
+        addLog('warning', message);
+      }
       originalWarn(...args);
     };
 
-    console.error = (...args) => {
+    console.error = (...args: any[]) => {
       const message = args.join(' ');
-      addLog('error', message);
+      // 排除监控相关的错误
+      if (!message.includes('监控') && !message.includes('上传') && !message.includes('连接')) {
+        addLog('error', message);
+      }
       originalError(...args);
     };
 
