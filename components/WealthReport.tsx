@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { GlassCard } from './GlassCard';
 import { SkeletonCard } from './SkeletonCard';
 import { TypewriterText } from './TypewriterText';
@@ -54,6 +54,26 @@ const tierColors: Record<string, { bg: string; text: string; border: string }> =
 const getTierColor = (tier?: string) => {
   if (!tier) return tierColors['B4'];
   return tierColors[tier] || tierColors['B4'];
+};
+
+// 将罗盘方位文案转换为角度（上方为北，顺时针）
+const getDirectionAngle = (direction?: string) => {
+  if (!direction) return 0;
+  const text = direction.replace(/\s/g, '');
+
+  // 先处理组合方位
+  if (text.includes('东北')) return 45;
+  if (text.includes('东南')) return 135;
+  if (text.includes('西南')) return 225;
+  if (text.includes('西北')) return 315;
+
+  // 再处理单独方位（默认正向）
+  if (text.includes('正北') || (text.includes('北') && !text.includes('东') && !text.includes('西'))) return 0;
+  if (text.includes('正东') || (text.includes('东') && !text.includes('南') && !text.includes('北'))) return 90;
+  if (text.includes('正南') || (text.includes('南') && !text.includes('东') && !text.includes('西'))) return 180;
+  if (text.includes('正西') || (text.includes('西') && !text.includes('南') && !text.includes('北'))) return 270;
+
+  return 0;
 };
 
 // 雷达图组件
@@ -178,6 +198,12 @@ export const WealthReport: React.FC<WealthReportProps> = ({ data, delay = 0 }) =
   const radar = data?.modules?.radar || [];
   const compass = data?.modules?.compass;
   const tierColor = getTierColor(overview?.tier);
+  const compassControls = useAnimation();
+  const [hasSpunCompass, setHasSpunCompass] = React.useState(false);
+  const compassTargetAngle = React.useMemo(
+    () => getDirectionAngle(compass?.direction),
+    [compass?.direction]
+  );
 
   // 如果没有数据，显示骨架屏
   if (!data || !overview) {
@@ -241,9 +267,9 @@ export const WealthReport: React.FC<WealthReportProps> = ({ data, delay = 0 }) =
                     {overview.tier || 'B4'}
                   </span>
                 </div>
-                {overview.tier_tag && (
+                {/* {overview.tier_tag && (
                   <p className="text-xs text-gray-500 mt-1">{overview.tier_tag}</p>
-                )}
+                )} */}
               </div>
             </div>
 
@@ -346,8 +372,67 @@ export const WealthReport: React.FC<WealthReportProps> = ({ data, delay = 0 }) =
             <div className="space-y-4">
               <h4 className="text-xl font-serif-sc text-amber-800 font-bold">2026 开运指南</h4>
 
+              {/* 交互式开运罗盘 */}
+              <div className="flex flex-col items-center justify-center">
+                <motion.div
+                  className="relative w-40 h-40 md:w-48 md:h-48 rounded-full bg-white/80 border-2 border-amber-300/70 shadow-[0_8px_30px_rgba(251,191,36,0.35)] cursor-pointer select-none"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={async () => {
+                    setHasSpunCompass(true);
+                    await compassControls.start({
+                      rotate: 720 + compassTargetAngle,
+                      transition: {
+                        duration: 1.8,
+                        ease: [0.16, 1, 0.3, 1]
+                      }
+                    });
+                  }}
+                >
+                  {/* 内圈与刻度 */}
+                  <div className="absolute inset-3 rounded-full border border-dashed border-amber-200/80" />
+                  <div className="absolute inset-6 rounded-full border border-amber-100/80" />
+
+                  {/* 方位文字（保持固定，不参与旋转） */}
+                  <span className="absolute top-1.5 left-1/2 -translate-x-1/2 text-[11px] font-semibold text-amber-800">
+                    北
+                  </span>
+                  <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 text-[11px] font-semibold text-amber-800">
+                    南
+                  </span>
+                  <span className="absolute top-1/2 left-1.5 -translate-y-1/2 text-[11px] font-semibold text-amber-800">
+                    西
+                  </span>
+                  <span className="absolute top-1/2 right-1.5 -translate-y-1/2 text-[11px] font-semibold text-amber-800">
+                    东
+                  </span>
+
+                  {/* 指针（通过动画旋转） */}
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center"
+                    animate={compassControls}
+                    initial={{ rotate: 0 }}
+                  >
+                    <div className="relative w-1 h-20">
+                      {/* 上端尖头 */}
+                      <div className="absolute top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[26px] border-l-transparent border-r-transparent border-b-amber-500 drop-shadow-md" />
+                      {/* 中心圆点 */}
+                      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-700 border border-amber-200 shadow-sm" />
+                    </div>
+                  </motion.div>
+
+                  {/* 中心纹理 */}
+                  <div className="absolute inset-10 rounded-full bg-gradient-to-br from-amber-50/80 to-yellow-50/80 border border-amber-100/80" />
+                </motion.div>
+                <p className="mt-3 text-[11px] text-amber-700/90">
+                  {hasSpunCompass
+                    ? `指针已锁定妳的吉利方位：「${compass.direction || '吉利方位'}」`
+                    : '轻点罗盘，让指针旋转至妳的吉利方位'}
+                </p>
+              </div>
+
               {/* 方位 */}
-              {compass.direction && (
+              {/* {compass.direction && (
                 <div className="bg-white/60 rounded-lg p-4 border border-amber-100/50">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="p-2 bg-amber-100/50 rounded-lg">
@@ -362,7 +447,7 @@ export const WealthReport: React.FC<WealthReportProps> = ({ data, delay = 0 }) =
                     </div>
                   </div>
                 </div>
-              )}
+              )} */}
 
               {/* 幸运物品 */}
               {compass.lucky_item && (

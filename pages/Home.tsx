@@ -12,6 +12,7 @@ const Home: React.FC = () => {
   const [time, setTime] = useState('12:00');
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
+  const [stage, setStage] = useState<'envelope' | 'input'>('envelope');
   const navigate = useNavigate();
 
   // Complete China provinces and cities data
@@ -62,6 +63,10 @@ const Home: React.FC = () => {
     setCity(''); // Reset city when province changes
   };
 
+  const handleOpenEnvelope = () => {
+    setStage('input');
+  };
+
   const handleStart = () => {
     if (!date) return;
     
@@ -69,16 +74,16 @@ const Home: React.FC = () => {
     if (vitaminId && (window as any).setVitaMeId) {
       (window as any).setVitaMeId(vitaminId);
     }
-    
+
     navigate(`/result?date=${date}&time=${time}&vitaminId=${vitaminId}&province=${province}&city=${city}`);
   };
 
   return (
     
-    <div className="min-h-screen bg-paper flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Decorative Orbs */}
-      <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+    <div className="min-h-screen bg-gradient-to-br from-[#f7f1ea] via-[#fbe4dd] to-[#e7e5df] flex flex-col items-center justify-center p-6 relative overflow-hidden">
+      {/* New Year ambient glow - 柔和莫兰迪红金 */}
+      <div className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 bg-[#f6c8b8]/55 rounded-full blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -left-24 w-80 h-80 bg-[#f0d7a1]/45 rounded-full blur-3xl" />
 
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
@@ -87,14 +92,14 @@ const Home: React.FC = () => {
       >
         <div className="text-center">
           <motion.div 
-            animate={{ rotate: [0, 10, -10, 0] }}
+            animate={{ rotate: [0, 8, -8, 0] }}
             transition={{ repeat: Infinity, duration: 4 }}
-            className="inline-block p-4 bg-white/80 rounded-full shadow-sm mb-4"
+            className="inline-block p-4 bg-white/40 border border-[#f0d7a1]/60 rounded-full shadow-sm mb-4"
           >
-            <Sparkles className="text-primary w-8 h-8" />
+            <Sparkles className="text-[#e0a96d] w-8 h-8" />
           </motion.div>
-          <h1 className="text-4xl font-serif-sc font-bold text-sage-600 tracking-wider mb-0">唯她命</h1>
-          <p className="text-gray-500 font-light tracking-widest uppercase text-md">Vita-Me</p>
+          <h1 className="text-4xl font-serif-sc font-bold text-[#7b4b3b] tracking-wider mb-0">唯她命</h1>
+          <p className="text-[#a06f52] font-light tracking-widest uppercase text-md">Vita-Me</p>
         </div>
                 {/* 品牌理念部分 */}
         <section className="pb-12 pt-6 text-center space-y-8">
@@ -111,99 +116,167 @@ const Home: React.FC = () => {
           
           {/* 标语 */}
           <div className="pt-4">
-            <p className="text-xl md:text-2xl font-serif-sc font-bold text-primary tracking-[0.2em] uppercase">
+            <p className="text-xl md:text-2xl font-serif-sc font-bold text-[#8d5a45] tracking-[0.2em] uppercase">
               唯妳定义，天生旺己
             </p>
           </div>
         </section>
 
-        <GlassCard className="space-y-6">
-          <div className="space-y-2">
-           
-            <p className="text-xs text-gray-400">输入你的出生信息，获取专属的“唯她命”</p>
-          </div>
+        {/* 新年限定交互动效 */}
+        <div className="relative mt-2">
+          {/* Step 1：电子红包 */}
+          {stage === 'envelope' && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <GlassCard className="space-y-6 bg-gradient-to-br from-[#fbe9e2] via-[#f7d8c5] to-[#f4e7d8] border border-[#f0d7a1]/70 shadow-2xl text-center py-8 px-6">
+                <div className="mb-4 text-[10px] tracking-[0.35em] text-[#a06f52] uppercase">
+                  2026 丙午 · 开财运
+                </div>
 
-          <div className="space-y-4">
-            <div className="space-y-1">
-              <span className="text-xs font-semibold text-gray-400 ml-1">Vita-Me ID</span>
-              <input 
-                type="text" 
-                value={vitaminId}
-                onChange={(e) => setVitaminId(e.target.value)}
-                placeholder="输入代号，提取今日份能量"
-                className="w-full bg-white/50 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-mono"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <span className="text-xs font-semibold text-gray-400 ml-1">出生日期</span>
-              <input 
-                type="date" 
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="w-full bg-white/50 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <span className="text-xs font-semibold text-gray-400 ml-1">出生时辰</span>
-              <input 
-                type="time" 
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-                className="w-full bg-white/50 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <span className="text-xs font-semibold text-gray-400 ml-1">出生地点</span>
-              <div className="grid grid-cols-2 gap-3">
-                <select 
-                  value={province}
-                  onChange={(e) => handleProvinceChange(e.target.value)}
-                  className="bg-white/50 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm"
+                <motion.button
+                  animate={{ y: [0, -4, 0] }}
+                  onClick={handleOpenEnvelope}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                  className="relative mx-auto w-40 h-56 rounded-3xl bg-gradient-to-b from-[#c65b54] via-[#b24f4a] to-[#8c4841] border border-[#f0d7a1]/70 flex items-center justify-center overflow-hidden"
                 >
-                  <option value="">选择省份</option>
-                  {Object.keys(locationData).map((prov) => (
-                    <option key={prov} value={prov}>{prov}</option>
-                  ))}
-                </select>
-                <select 
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  disabled={!province}
-                  className="bg-white/50 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  
+                  {/* 红包装饰 */}
+                  <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[#f2c16b]/65 to-transparent" />
+                  <div className="absolute inset-4 rounded-[1.1rem] border border-[#f3d4a5]/60" />
+                  <Sparkles className="absolute top-3 left-3 text-[#f2c16b]/90" size={18} />
+                  <Sparkles className="absolute bottom-4 right-4 text-[#f2c16b]/80" size={16} />
+
+                  <div className="relative z-10 space-y-3">
+                  <p className="text-[11px] text-[#f2c16b]/90 leading-relaxed px-4">
+                      点击查看你的
+                    </p>
+                    <p className="text-lg font-serif-sc font-bold text-[#f2c16b]/90">
+                      丙午火年
+                    </p>
+                    
+                    <p className="text-[11px] tracking-[0.3em] text-[#f2c16b]/90">
+                      财运报告
+                    </p>
+                  </div>
+                  
+                </motion.button>
+
+                {/* <p className="mt-6 text-xs text-[#7b4b3b]">
+                  2026 丙午火年，你的财运等级已生成。
+                </p> */}
+
+                {/* <Button 
+                  className="mt-5 w-full bg-[#f2c16b] hover:bg-[#f7d08a] text-[#6b4a2b] font-semibold tracking-wide border-none"
+                  onClick={handleOpenEnvelope}
                 >
-                  <option value="">选择城市</option>
-                  {province && locationData[province as keyof typeof locationData]?.map((cityName) => (
-                    <option key={cityName} value={cityName}>{cityName}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
+                  拆开看（开启财运）
+                </Button> */}
+              </GlassCard>
+            </motion.div>
+          )}
 
-          <Button 
-            className="w-full" 
-            onClick={handleStart}
-            disabled={!date}
-          >
-            开启解读
-          </Button>
+          {/* Step 2：输入/计算表单 */}
+          {stage === 'input' && (
+            <motion.div
+              initial={{ opacity: 0, y: 30, rotateX: -8 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+            >
+              <GlassCard className="space-y-6 bg-white/95">
+                <div className="space-y-2">
+                  <p className="text-xs text-gray-400">
+                    填写你的出生信息，解锁今日专属「唯她命」财运报告
+                  </p>
+                </div>
 
-          <div className="flex justify-center gap-6 pt-4 text-gray-400">
-            <div className="flex items-center gap-1 text-[10px]">
-              <Heart size={14} className="text-accent" />
-              <span>精准测算</span>
-            </div>
-            <div className="flex items-center gap-1 text-[10px]">
-              <Moon size={14} className="text-indigo-300" />
-              <span>AI赋能</span>
-            </div>
-          </div>
-        </GlassCard>
+                <div className="space-y-4">
+                  <div className="space-y-1">
+                    <span className="text-xs font-semibold text-gray-400 ml-1">Vita-Me ID</span>
+                    <input 
+                      type="text" 
+                      value={vitaminId}
+                      onChange={(e) => setVitaminId(e.target.value)}
+                      placeholder="输入代号，提取今日份能量"
+                      className="w-full bg-white/70 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-mono"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <span className="text-xs font-semibold text-gray-400 ml-1">出生日期</span>
+                    <input 
+                      type="date" 
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      className="w-full bg-white/70 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <span className="text-xs font-semibold text-gray-400 ml-1">出生时辰</span>
+                    <input 
+                      type="time" 
+                      value={time}
+                      onChange={(e) => setTime(e.target.value)}
+                      className="w-full bg-white/70 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <span className="text-xs font-semibold text-gray-400 ml-1">出生地点</span>
+                    <div className="grid grid-cols-2 gap-3">
+                      <select 
+                        value={province}
+                        onChange={(e) => handleProvinceChange(e.target.value)}
+                        className="bg-white/70 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm"
+                      >
+                        <option value="">选择省份</option>
+                        {Object.keys(locationData).map((prov) => (
+                          <option key={prov} value={prov}>{prov}</option>
+                        ))}
+                      </select>
+                      <select 
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        disabled={!province}
+                        className="bg-white/70 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <option value="">选择城市</option>
+                        {province && locationData[province as keyof typeof locationData]?.map((cityName) => (
+                          <option key={cityName} value={cityName}>{cityName}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <Button 
+                  className="w-full  bg-gradient-to-b from-[#c65b54] to-[#b24f4a]" 
+                  onClick={handleStart}
+                  disabled={!date}
+                >
+                  开启解读
+                </Button>
+
+                <div className="flex justify-center gap-6 pt-4 text-gray-400">
+                  <div className="flex items-center gap-1 text-[10px]">
+                    <Heart size={14} className="text-accent" />
+                    <span>精准测算</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-[10px]">
+                    <Moon size={14} className="text-indigo-300" />
+                    <span>AI赋能</span>
+                  </div>
+                </div>
+              </GlassCard>
+            </motion.div>
+          )}
+
+        </div>
         {/* 正文 */}
-          <p className="text-gray-600 text-center mt-6 text-base md:text-sm leading-relaxed max-w-lg mx-auto px-4">
+          <p className="text-[#7b4b3b] text-center mt-6 text-base md:text-sm leading-relaxed max-w-lg mx-auto px-4">
             重塑东方智慧，去芜存菁<br></br>我们利用 AI 技术净化传统命理中的性别偏见，为您提供纯粹、积极的人生策展方案。命运不是写好的剧本，而是妳手中的力量
           </p>
       </motion.div>
