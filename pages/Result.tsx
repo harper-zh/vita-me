@@ -133,6 +133,10 @@ const Result: React.FC = () => {
     setExpandedCardId(prev => prev === cardId ? null : cardId);
   };
 
+  // 财运报告卡片锚点
+  const wealthReportRef = useRef<HTMLDivElement | null>(null);
+  const hasScrolledToWealthRef = useRef(false);
+
   // 使用 ref 来跟踪是否已经发起请求，防止重复调用（React StrictMode 在开发模式下会执行两次）
   const hasFetchedRef = useRef(false);
   const fetchKeyRef = useRef<string>('');
@@ -238,6 +242,23 @@ const Result: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date, time]);
 
+  // 当结果生成成功且包含财运报告模块时，自动锚定到财运报告区域（视口中部）
+  useEffect(() => {
+    if (
+      !hasScrolledToWealthRef.current &&
+      apiStatus === 'success' &&
+      aiData?.modules &&
+      wealthReportRef.current
+    ) {
+      hasScrolledToWealthRef.current = true;
+      setExpandedCardId('wealth-report');
+      wealthReportRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  }, [apiStatus, aiData]);
+
   // 重试函数
   const handleRetry = () => {
     if (retryCount >= 3) {
@@ -301,20 +322,29 @@ const Result: React.FC = () => {
   // 全屏加载状态（连接中 0-3秒）
   if (showFullLoading) {
     return (
-      <div className="min-h-screen bg-paper flex flex-col items-center justify-center space-y-6">
+      <div className="min-h-screen bg-paper flex flex-col items-center justify-center px-6">
         <motion.div
-          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="relative"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+          className="w-full max-w-sm"
         >
-          <div className="w-16 h-16 border-2 border-primary/20 rounded-full" />
-          <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-primary rounded-full" />
-          <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" size={20} />
+          <GlassCard className="py-10 flex flex-col items-center justify-center bg-gradient-to-br from-[#c65b54]/90 to-[#d19b5c]/85 border-none">
+            <motion.div
+              className="relative w-16 h-16"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
+            >
+              <div className="absolute inset-0 rounded-full border border-amber-200/40" />
+              <div className="absolute inset-2 rounded-full border-t-2 border-amber-300" />
+              <span className="absolute -top-2 left-1/2 -translate-x-1/2 text-lg">🪙</span>
+              <span className="absolute -right-1 top-6 text-base">🪙</span>
+              <span className="absolute -bottom-2 left-1/4 text-sm">🪙</span>
+            </motion.div>
+            <p className="mt-5 text-xs text-[#fdf5ec]">正在为你盘点 2026 财运...</p>
+            <p className="mt-1 text-[11px] text-[#f7e7d5]">金币滚动中 · 请稍候</p>
+          </GlassCard>
         </motion.div>
-        <div className="text-center space-y-2">
-          <p className="text-sage-600 font-serif-sc text-xl tracking-widest">正在采撷妳的星尘</p>
-          <p className="text-gray-400 text-xs animate-pulse">解析生命密码中...</p>
-        </div>
       </div>
     );
   }
@@ -583,43 +613,46 @@ const Result: React.FC = () => {
 
         {/* 财运报告模块 */}
         {aiData?.modules ? (
-          <ExpandableCard
-            id="wealth-report"
-            title="2026 财运报告"
-            summary={aiData?.modules?.overview?.comment 
-              ? aiData.modules.overview.comment.substring(0, 100) + '...'
-              : `综合财运指数：${aiData?.modules?.overview?.total_score || 0}分 | ${aiData?.modules?.overview?.tier_tag || '分析中...'}`}
-            isExpanded={expandedCardId === 'wealth-report'}
-            onToggle={handleCardToggle}
-            delay={0.85}
-            icon={
-              <div className="relative">
-                <DollarSign size={16} className="text-amber-500" />
-                <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                  className="absolute -top-1 -right-1 text-[10px]"
-                >
-                  ✨
-                </motion.div>
-              </div>
-            }
-            badge={
-              <div className="flex items-center gap-1.5 px-2 py-0.5 bg-amber-50/50 rounded-full border border-amber-200/30">
-                <motion.span
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="text-sm"
-                >
-                  🐴
-                </motion.span>
-                <span className="text-[10px] text-amber-600 font-medium">马年开运</span>
-              </div>
-            }
-            content={
-              <WealthReport data={aiData} delay={0} />
-            }
-          />
+          <div ref={wealthReportRef}>
+            <ExpandableCard
+              id="wealth-report"
+              title="2026 财运报告"
+              summary={aiData?.modules?.overview?.comment 
+                ? aiData.modules.overview.comment.substring(0, 100) + '...'
+                : `综合财运指数：${aiData?.modules?.overview?.total_score || 0}分 | ${aiData?.modules?.overview?.tier_tag || '分析中...'}`}
+              isExpanded={expandedCardId === 'wealth-report'}
+              onToggle={handleCardToggle}
+    
+              delay={0.85}
+              icon={
+                <div className="relative">
+                  <DollarSign size={16} className="text-amber-500" />
+                  <motion.div
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                    className="absolute -top-1 -right-1 text-[10px]"
+                  >
+                    ✨
+                  </motion.div>
+                </div>
+              }
+              badge={
+                <div className="flex items-center gap-1.5 px-2 py-0.5 bg-amber-50/50 rounded-full border border-amber-200/30">
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                    className="text-sm"
+                  >
+                    🐴
+                  </motion.span>
+                  <span className="text-[10px] text-amber-600 font-medium">马年开运</span>
+                </div>
+              }
+              content={
+                <WealthReport data={aiData} delay={0} />
+              }
+            />
+          </div>
         ) : (
           <SkeletonCard lines={8} delay={0.85} />
         )}

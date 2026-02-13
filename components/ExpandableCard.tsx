@@ -30,50 +30,47 @@ export const ExpandableCard: React.FC<ExpandableCardProps> = ({
 }) => {
   return (
     <GlassCard className={`relative overflow-hidden ${className}`} delay={delay}>
-      <button
-        onClick={() => onToggle(id)}
-        className="w-full text-left focus:outline-none  rounded-3xl"
-      >
-        {/* 折叠状态：标题和摘要 */}
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 mb-2">
-              {icon && <div className="flex-shrink-0">{icon}</div>}
-              <h3 className="text-xl font-serif-sc text-sage-600 font-bold flex-1">
-                {title}
-              </h3>
-              {badge && <div className="flex-shrink-0">{badge}</div>}
-            </div>
-            {/* <div className="text-sm text-gray-600 leading-relaxed line-clamp-2">
-              {summary}
-            </div> */}
+      {/* 折叠状态：标题和摘要 */}
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-3 mb-2">
+            {icon && <div className="flex-shrink-0">{icon}</div>}
+            <h3 className="text-xl font-serif-sc text-sage-600 font-bold flex-1">
+              {title}
+            </h3>
+            {badge && <div className="flex-shrink-0">{badge}</div>}
           </div>
-          <motion.div
-            animate={{ rotate: isExpanded ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
-            className="flex-shrink-0 ml-2"
-          >
-            <ChevronDown className="text-gray-400" size={20} />
-          </motion.div>
+          {/* <div className="text-sm text-gray-600 leading-relaxed line-clamp-2">
+            {summary}
+          </div> */}
         </div>
+        <motion.button
+          type="button"
+          onClick={() => onToggle(id)}
+          animate={{ rotate: isExpanded ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex-shrink-0 ml-2 rounded-full p-1 focus:outline-none hover:bg-gray-100/60 active:bg-gray-200/60"
+        >
+          <ChevronDown className="text-gray-400" size={20} />
+        </motion.button>
+      </div>
 
-        {/* 展开状态：完整内容 */}
-        <AnimatePresence initial={false}>
-          {isExpanded && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="overflow-hidden"
-            >
-              <div className="pt-6 mt-2 border-t border-gray-200/50">
-                {content}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </button>
+      {/* 展开状态：完整内容 */}
+      <AnimatePresence initial={false}>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="pt-6 mt-2 border-t border-gray-200/50">
+              {content}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </GlassCard>
   );
 };
