@@ -37,6 +37,8 @@ interface WealthReportData {
 interface WealthReportProps {
   data?: WealthReportData;
   delay?: number;
+  // full：页面内完整展示；poster：海报内精简版（仅总览 + 雷达图）
+  variant?: 'full' | 'poster';
 }
 
 // 等级颜色映射
@@ -193,7 +195,7 @@ const RadarChart: React.FC<{ data: Array<{ subject: string; score: number }> }> 
   );
 };
 
-export const WealthReport: React.FC<WealthReportProps> = ({ data, delay = 0 }) => {
+export const WealthReport: React.FC<WealthReportProps> = ({ data, delay = 0, variant = 'full' }) => {
   const overview = data?.modules?.overview;
   const radar = data?.modules?.radar || [];
   const compass = data?.modules?.compass;
@@ -274,6 +276,7 @@ export const WealthReport: React.FC<WealthReportProps> = ({ data, delay = 0 }) =
             </div>
 
             {/* 分数分解 */}
+            {variant === 'full' && (
             <div className="grid grid-cols-2 gap-4 pt-2">
               <div className="bg-white/60 rounded-lg p-3 border border-white/40">
                 <p className="text-xs text-gray-500 mb-1">原局财气</p>
@@ -285,10 +288,10 @@ export const WealthReport: React.FC<WealthReportProps> = ({ data, delay = 0 }) =
                 <p className="text-lg font-bold text-amber-700">{overview.yearly_luck_score || 0}</p>
                 <p className="text-[10px] text-gray-400 mt-1">满分 40</p>
               </div>
-            </div>
+            </div>)}
 
             {/* 评语 */}
-            {overview.comment && (
+            {overview.comment && variant === 'full' && (
               <div className="bg-white/50 rounded-lg p-4 border border-amber-100/50">
                 <TypewriterText
                   text={overview.comment}
@@ -310,7 +313,7 @@ export const WealthReport: React.FC<WealthReportProps> = ({ data, delay = 0 }) =
                 <Target size={20} className="text-amber-600" />
               </div>
               <div>
-                <h4 className="text-lg font-serif-sc text-sage-600 font-bold tracking-wide">
+                <h4 className="text-lg font-serif-sc text-amber-600 font-bold tracking-wide">
                   财富雷达
                 </h4>
                 <p className="text-xs text-gray-400 tracking-widest">
@@ -324,28 +327,30 @@ export const WealthReport: React.FC<WealthReportProps> = ({ data, delay = 0 }) =
               <RadarChart data={radar.map(item => ({ subject: item.subject, score: item.score }))} />
             </div>
 
-            {/* 详细分析 */}
-            <div className="space-y-3">
-              {radar.map((item, idx) => (
-                <div key={idx} className="bg-white/50 rounded-lg p-3 border border-white/40">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-sage-700">{item.subject}</span>
-                    <span className="text-sm font-bold text-amber-600">{item.score}分</span>
+            {/* 详细分析：仅在完整模式下展示 */}
+            {variant === 'full' && (
+              <div className="space-y-3">
+                {radar.map((item, idx) => (
+                  <div key={idx} className="bg-white/50 rounded-lg p-3 border border-white/40">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-sage-700">{item.subject}</span>
+                      <span className="text-sm font-bold text-amber-600">{item.score}分</span>
+                    </div>
+                    <TypewriterText
+                      text={item.analysis}
+                      speed={30}
+                      className="text-xs text-gray-600 leading-relaxed"
+                    />
                   </div>
-                  <TypewriterText
-                    text={item.analysis}
-                    speed={30}
-                    className="text-xs text-gray-600 leading-relaxed"
-                  />
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </GlassCard>
       )}
 
-      {/* 模块三：开运罗盘 */}
-      {compass && (
+      {/* 模块三：开运罗盘（仅完整模式展示） */}
+      {variant === 'full' && compass && (
         <GlassCard 
           className="relative overflow-hidden group bg-gradient-to-br from-amber-50/60 to-yellow-50/40 border border-amber-200/50 shadow-md"
           delay={delay + 0.2}

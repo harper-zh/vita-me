@@ -154,7 +154,7 @@ const Home: React.FC = () => {
                       点击查看你的
                     </p>
                     <p className="text-lg font-serif-sc font-bold text-[#f2c16b]/90">
-                      丙午火年
+                      丙午年
                     </p>
                     
                     <p className="text-[11px] tracking-[0.3em] text-[#f2c16b]/90">
@@ -199,7 +199,7 @@ const Home: React.FC = () => {
                       type="text" 
                       value={vitaminId}
                       onChange={(e) => setVitaminId(e.target.value)}
-                      placeholder="输入代号，提取今日份能量"
+                      placeholder="输入妳的昵称，即刻开启马年财运"
                       className="w-full bg-white/70 border border-sage-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-mono"
                     />
                   </div>

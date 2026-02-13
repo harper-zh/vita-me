@@ -253,7 +253,7 @@ A10及以上（10亿+）：大资本家、企业家或顶级富豪阶层
   "modules": {
     "overview": {
       "total_score": 根据财运模块计算说明计算,
-      "tier": 根据total_score匹配对应的财富等级(A6-A10), 详见财富等级说明, 语言诙谐,如A9小富婆,
+      "tier": 根据total_score匹配对应的财富等级(A6-A10), 详见财富等级说明, 语言诙谐,如A6小康家, A9小富婆,
       "tier_tag": "根据total_score匹配",
       "native_score": 根据财运模块计算说明计算,
       "yearly_luck_score": 根据财运模块计算说明计算,

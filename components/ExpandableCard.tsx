@@ -35,7 +35,7 @@ export const ExpandableCard: React.FC<ExpandableCardProps> = ({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 mb-2">
             {icon && <div className="flex-shrink-0">{icon}</div>}
-            <h3 className="text-xl font-serif-sc text-sage-600 font-bold flex-1">
+            <h3 className="text-xl font-serif-sc text-primary font-bold flex-1">
               {title}
             </h3>
             {badge && <div className="flex-shrink-0">{badge}</div>}

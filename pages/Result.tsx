@@ -2,18 +2,19 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { GlassCard } from '../components/GlassCard';
 import { Button } from '../components/Button';
-import { DataSourceIndicator } from '../components/DataSourceIndicator';
 import { SkeletonCard } from '../components/SkeletonCard';
 import { ErrorModal } from '../components/ErrorModal';
 import { TypewriterText } from '../components/TypewriterText';
 import { calculateBazi, getElementColor } from '../utils/baziUtils';
 import { generateBaziInterpretation } from '../services/zhipuService';
-import { defaultInterpretation, defaultWuxingInsight } from '../data/defaultContent';
-import { ChevronLeft, Share2, Sparkles, Wind, Zap, Fingerprint, Sun, Coffee, Music, DollarSign, TrendingUp } from 'lucide-react';
+import { defaultInterpretation } from '../data/defaultContent';
+import { ChevronLeft, Share2, Sparkles, Zap, Fingerprint, Sun, Coffee, Music, DollarSign, X, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FluidEnergyField } from '../components/FluidEnergyField';
 import { WealthReport } from '../components/WealthReport';
 import { ExpandableCard } from '../components/ExpandableCard';
+import wechatCode from '../wechat_code.jpg';
+import html2canvas from 'html2canvas';
 
 // API状态类型
 type ApiStatus = 'connecting' | 'generating' | 'success' | 'error';
@@ -124,6 +125,46 @@ const Result: React.FC = () => {
 
   // 五行数据用于流体能量场
   const [wuxingData, setWuxingData] = useState<any>({});
+
+  // 分享海报弹层
+  const [showPoster, setShowPoster] = useState(false);
+  const posterRef = useRef<HTMLDivElement>(null);
+
+  // 保存海报到本地
+  const handleSavePoster = async () => {
+    if (!posterRef.current) return;
+    
+    try {
+      // 临时移除 scale 变换以获取正确的渲染
+      const posterElement = posterRef.current.parentElement as HTMLElement;
+      const originalTransform = posterElement?.style.transform || '';
+      if (posterElement) {
+        posterElement.style.transform = 'scale(1)';
+      }
+
+      const canvas = await html2canvas(posterRef.current, {
+        backgroundColor: '#FAF9F6',
+        scale: 2, // 提高清晰度（2倍分辨率）
+        useCORS: true,
+        logging: false,
+        width: 400,
+        height: posterRef.current.scrollHeight
+      });
+      
+      // 恢复原始 transform
+      if (posterElement) {
+        posterElement.style.transform = originalTransform;
+      }
+      
+      const link = document.createElement('a');
+      link.download = `我的马年财运-${vitaminId || 'vita-me'}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch (error) {
+      console.error('保存海报失败:', error);
+      alert('保存失败，请稍后重试');
+    }
+  };
 
   // 卡片展开状态管理
   const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
@@ -285,6 +326,13 @@ const Result: React.FC = () => {
     navigate('/');
   };
 
+  // 打开分享海报（需在生成成功且有财运模块时）
+  const handleOpenPoster = () => {
+    if (apiStatus === 'success' && aiData?.modules) {
+      setShowPoster(true);
+    }
+  };
+
   // 处理五行数据用于流体能量场
   const processWuxingData = (wuxing: string[]) => {
     const elementCount: { [key: string]: number } = {
@@ -378,14 +426,95 @@ const Result: React.FC = () => {
         </div>
       )}
 
+      {/* 分享海报弹层 */}
+      {showPoster && aiData?.modules && (
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center px-4">
+          <div className="relative" style={{ transform: 'scale(0.7)' }}>
+            <div ref={posterRef}>
+              <GlassCard className="overflow-hidden bg-gradient-to-br from-[#FAF9F6] via-[#F4E7D8] to-[#E8DFD2] border-[#E6DCCD] shadow-2xl w-[400px]">
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute -top-16 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl" />
+                  <div className="absolute -bottom-20 -left-10 w-48 h-48 bg-amber-200/20 rounded-full blur-3xl" />
+                </div>
+
+                <div className="relative z-10 p-4 space-y-3">
+                  {/* 标题 & 等级 */}
+                  <div className="text-center space-y-1">
+                    <p className="text-[10px] tracking-[0.25em] text-[#8C8174] uppercase">
+                      我的马年财运
+                    </p>
+                    <div className="flex items-baseline justify-center gap-2">
+                      <span className="text-4xl font-serif-sc font-bold text-amber-700 drop-shadow-sm">
+                        {aiData.modules.overview?.tier || '—'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* 财运总览 & 雷达图：复用 WealthReport（海报精简版） */}
+                  <div className="rounded-2xl border border-amber-100/70 bg-white/70 px-3 py-3">
+                    <WealthReport data={aiData} delay={0} variant="poster" />
+                  </div>
+
+                  {/* 底部二维码 & 文案 */}
+                  <div className="pt-0 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-12 h-12 rounded-lg bg-white/80 border border-gray-200/70 overflow-hidden flex items-center justify-center">
+                        <img
+                          src={wechatCode}
+                          alt="唯她命小助手微信"
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <p className="text-[10px] leading-snug text-[#6B5E51] max-w-[9rem]">
+                        扫一扫<br />预见妳的
+                        <span className="font-semibold">A8A9富婆之路</span>
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-[9px] uppercase tracking-[0.2em] text-gray-400">
+                        Vita-Me · 2026 丙午
+                      </p>
+                      
+                    </div>
+                  </div>
+                </div>
+              </GlassCard>
+            </div>
+
+            {/* 操作按钮 */}
+            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handleSavePoster}
+                className="px-4 py-2 rounded-full bg-white shadow-lg flex items-center gap-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <Download size={16} />
+                保存到本地
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowPoster(false)}
+                className="w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-colors"
+              >
+                <X size={18} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="min-h-screen bg-paper p-4 pb-24 md:p-8 selection:bg-accent/20">
         <header className="flex items-center justify-between mb-8 max-w-2xl mx-auto pt-4">
           <button onClick={() => navigate('/')} className="p-2 hover:bg-white/50 rounded-full transition-all">
             <ChevronLeft className="text-sage-600" />
           </button>
-          <h2 className="text-xl font-serif-sc text-sage-600 font-bold tracking-widest">Vita-Me</h2>
-          <button className="p-2 hover:bg-white/50 rounded-full transition-all">
-            <Share2 className="text-sage-600" size={20} />
+          <h2 className="text-xl font-serif-sc text-primary font-bold tracking-widest">Vita-Me</h2>
+          <button
+            className="p-2 hover:bg-white/50 rounded-full transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            onClick={handleOpenPoster}
+            disabled={apiStatus !== 'success' || !aiData?.modules}
+          >
+            <Share2 className="text-primary" size={20} />
           </button>
         </header>
 
@@ -399,7 +528,7 @@ const Result: React.FC = () => {
               </div>
               <div className="flex-1">
                 {/* <p className="text-xs font-bold text-gray-400 uppercase mb-1">Vitamin ID</p> */}
-                <p className="text-lg font-mono font-bold text-sage-600 tracking-wider">{vitaminId}</p>
+                <p className="text-lg font-mono font-bold text-primary tracking-wider">{vitaminId}</p>
                 {(province || city) && (
                   <p className="text-xs text-gray-500 mt-1">
                     出生地：{province} {city}
@@ -438,6 +567,7 @@ const Result: React.FC = () => {
         {/* AI 性格解读 */}
         <ExpandableCard
           id="personality"
+          
           title="妳的性格底色"
           summary={aiData?.personality ? aiData.personality.substring(0, 100) + '...' : '正在生成性格分析...'}
           isExpanded={expandedCardId === 'personality'}
@@ -446,7 +576,7 @@ const Result: React.FC = () => {
           icon={
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold">
               <Zap size={14} />
-              <span>AI 生命能量解读</span>
+              {/* <span>生命能量解读</span> */}
             </div>
           }
           content={
@@ -464,6 +594,95 @@ const Result: React.FC = () => {
           }
         />
 
+        {/* 五行流体能量场 */}
+        <ExpandableCard
+          id="wuxing"
+          title="五行能量场"
+          summary={aiData?.elementBalance ? aiData.elementBalance.substring(0, 100) + '...' : '正在分析五行能量...'}
+          isExpanded={expandedCardId === 'wuxing'}
+          onToggle={handleCardToggle}
+          delay={0.7}
+          className="border-none bg-gradient-to-br from-white/60 to-sage-50/40"
+          icon={
+            <div className="p-3 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl w-fit">
+              <Zap size={20} className="text-primary" />
+            </div>
+          }
+          badge={
+            <span className="text-xs text-gray-400 tracking-widest">ELEMENTAL ENERGY</span>
+          }
+          content={
+            <div className="space-y-6">
+              <FluidEnergyField data={wuxingData} />
+              
+              {/* 能量解读 */}
+              <div className="bg-white/40 rounded-xl p-4 backdrop-blur-sm">
+                <div className="space-y-2">
+                  <h4 className="text-sm font-bold text-sage-700 tracking-wide">
+                    五行能量状态
+                  </h4>
+                  {aiData?.elementBalance ? (
+                    <TypewriterText
+                      text={aiData.elementBalance}
+                      speed={30}
+                      className="text-xs text-sage-600 leading-relaxed"
+                    />
+                  ) : (
+                    <SkeletonCard lines={2} className="bg-transparent shadow-none border-none p-0" />
+                  )}
+                </div>
+              </div>
+            </div>
+          }
+        />
+
+
+        {/* 财运报告模块 */}
+        {aiData?.modules ? (
+          <div ref={wealthReportRef}>
+            <ExpandableCard
+              id="wealth-report"
+              title="2026 财运报告"
+              summary={aiData?.modules?.overview?.comment 
+                ? aiData.modules.overview.comment.substring(0, 100) + '...'
+                : `综合财运指数：${aiData?.modules?.overview?.total_score || 0}分 | ${aiData?.modules?.overview?.tier_tag || '分析中...'}`}
+              isExpanded={expandedCardId === 'wealth-report'}
+              onToggle={handleCardToggle}
+    
+              delay={0.85}
+              icon={
+                <div className="relative">
+                  <DollarSign size={16} className="text-amber-500" />
+                  <motion.div
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                    className="absolute -top-1 -right-1 text-[10px]"
+                  >
+                    ✨
+                  </motion.div>
+                </div>
+              }
+              badge={
+                <div className="flex items-center gap-1.5 px-2 py-0.5 bg-amber-50/50 rounded-full border border-amber-200/30">
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                    className="text-sm"
+                  >
+                    🐴
+                  </motion.span>
+                  <span className="text-[10px] text-amber-600 font-medium">马年开运</span>
+                </div>
+              }
+              content={
+                <WealthReport data={aiData} delay={0} />
+              }
+            />
+          </div>
+        ) : (
+          <SkeletonCard lines={8} delay={0.85} />
+        )}
+
         {/* 维生素建议卡片 */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {aiData?.vitamin ? (
@@ -474,7 +693,7 @@ const Result: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-gray-400 uppercase mb-1">今日唯她命</h4>
-                  <p className="text-lg font-serif-sc text-sage-600 font-bold">{aiData.vitamin}</p>
+                  <p className="text-lg font-serif-sc text-primary font-bold">{aiData.vitamin}</p>
                 </div>
                 <p className="text-xs text-gray-500 leading-relaxed italic">
                   " {aiData.advice} "
@@ -523,47 +742,7 @@ const Result: React.FC = () => {
           )}
         </section>
 
-        {/* 五行流体能量场 */}
-        <ExpandableCard
-          id="wuxing"
-          title="五行能量场"
-          summary={aiData?.elementBalance ? aiData.elementBalance.substring(0, 100) + '...' : '正在分析五行能量...'}
-          isExpanded={expandedCardId === 'wuxing'}
-          onToggle={handleCardToggle}
-          delay={0.7}
-          className="border-none bg-gradient-to-br from-white/60 to-sage-50/40"
-          icon={
-            <div className="p-3 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl w-fit">
-              <Zap size={20} className="text-primary" />
-            </div>
-          }
-          badge={
-            <span className="text-xs text-gray-400 tracking-widest">ELEMENTAL ENERGY</span>
-          }
-          content={
-            <div className="space-y-6">
-              <FluidEnergyField data={wuxingData} />
-              
-              {/* 能量解读 */}
-              <div className="bg-white/40 rounded-xl p-4 backdrop-blur-sm">
-                <div className="space-y-2">
-                  <h4 className="text-sm font-bold text-sage-700 tracking-wide">
-                    五行能量状态
-                  </h4>
-                  {aiData?.elementBalance ? (
-                    <TypewriterText
-                      text={aiData.elementBalance}
-                      speed={30}
-                      className="text-xs text-sage-600 leading-relaxed"
-                    />
-                  ) : (
-                    <SkeletonCard lines={2} className="bg-transparent shadow-none border-none p-0" />
-                  )}
-                </div>
-              </div>
-            </div>
-          }
-        />
+        
 
         {/* 今日搞钱建议 */}
         {aiData?.wealth ? (
@@ -611,51 +790,7 @@ const Result: React.FC = () => {
           <SkeletonCard lines={5} delay={0.8} className="bg-gradient-to-br from-[#FAF9F6] to-[#E8DFD2]" />
         )}
 
-        {/* 财运报告模块 */}
-        {aiData?.modules ? (
-          <div ref={wealthReportRef}>
-            <ExpandableCard
-              id="wealth-report"
-              title="2026 财运报告"
-              summary={aiData?.modules?.overview?.comment 
-                ? aiData.modules.overview.comment.substring(0, 100) + '...'
-                : `综合财运指数：${aiData?.modules?.overview?.total_score || 0}分 | ${aiData?.modules?.overview?.tier_tag || '分析中...'}`}
-              isExpanded={expandedCardId === 'wealth-report'}
-              onToggle={handleCardToggle}
-    
-              delay={0.85}
-              icon={
-                <div className="relative">
-                  <DollarSign size={16} className="text-amber-500" />
-                  <motion.div
-                    animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                    className="absolute -top-1 -right-1 text-[10px]"
-                  >
-                    ✨
-                  </motion.div>
-                </div>
-              }
-              badge={
-                <div className="flex items-center gap-1.5 px-2 py-0.5 bg-amber-50/50 rounded-full border border-amber-200/30">
-                  <motion.span
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="text-sm"
-                  >
-                    🐴
-                  </motion.span>
-                  <span className="text-[10px] text-amber-600 font-medium">马年开运</span>
-                </div>
-              }
-              content={
-                <WealthReport data={aiData} delay={0} />
-              }
-            />
-          </div>
-        ) : (
-          <SkeletonCard lines={8} delay={0.85} />
-        )}
+
 
         {/* 今日养生建议 */}
         <ExpandableCard
@@ -718,7 +853,7 @@ const Result: React.FC = () => {
 
 
         <div className="flex flex-col gap-3 pt-4">
-          <Button variant="ghost" className="w-full border border-sage-100" onClick={() => navigate('/')}>
+          <Button variant="ghost" className="w-full border border-sage-100 text-primary" onClick={() => navigate('/')}>
             返回首页
           </Button>
         </div>
